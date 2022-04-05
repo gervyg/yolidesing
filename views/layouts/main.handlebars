@@ -14,11 +14,26 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/static/assets/css/style.css">
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
+<!-- include summernote css/js -->
+  
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />  
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
 </head>
+
+
+
+
+
 
 <body>
     
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light py-0 px-5">
+    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light py-0 px-0">
         <div class="container-fluid">
           <a class="navbar-brand text-white" href="#"><img src="/static/assets/img/logo.png" width="8%" class="png"> YOLIDESING</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +45,7 @@
                 <a class="nav-link active " aria-current="page" href="#inicio">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#quienesSomos">Productos</a>
+                <a class="nav-link " href="#productos">Productos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="#destacados">Presupuesto</a>
@@ -40,7 +55,7 @@
               </li>
               
               <li class="nav-item">
-                <a class="nav-link " href="#destacados">Ingresar</a>
+                <a class="nav-link " href="././login">Ingresar</a>
                 </li>
               </ul>
             
@@ -49,16 +64,16 @@
       </nav>
 <header id="inicio">
 <!--carrusel-->
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="/static/assets/img/camisas.jpg" class="d-block w-75" alt="carrusel1">
+            <img src="/static/assets/img/camisas.jpg" class="d-block w-75 mx-auto" alt="carrusel1">
           </div>
           <div class="carousel-item">
-            <img src="/static/assets/img/TazonesPersonalizados.png" class="d-block w-75" alt="carrusel2">
+            <img src="/static/assets/img/TazonesPersonalizados.png" class="d-block w-75 mx-auto" alt="carrusel2">
           </div>
           <div class="carousel-item">
-            <img src="/static/assets/img/plotters.jpeg" class="d-block w-75" alt="carrusel3">
+            <img src="/static/assets/img/plotters.jpeg" class="d-block w-75 mx-auto" alt="carrusel3">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -74,7 +89,7 @@
 
 
 
-<h1 class="text-center">PRODUCTOS</h1>
+<h1 id="productos" class="text-center my-5">PRODUCTOS</h1>
 <!--card-->
 <section id="destacados" class="container-fluid negro px-5">
 
@@ -149,7 +164,7 @@
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/stactic/assets/img/PEVU.jpg" class="card-img-top" alt="card7">
+            <img src="/static/assets/img/BusinessFLyers.jpg" class="card-img-top" alt="card7">
             <div class="card-body bg-info">
               <h5 class="card-title">Tarjetas</h5>
               <p class="card-text"> Tarjetas 100 unidades, papel couche 300gr Full color, impresas por un lado. $ 5.000 </p>
@@ -158,7 +173,7 @@
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/public/assets/img/53.jpg" class="card-img-top" alt="card8">
+            <img src="/static/assets/img/53.jpg" class="card-img-top" alt="card8">
             <div class="card-body bg-info">
               <h5 class="card-title">Impresiones Digitales</h5>
               <p class="card-text">Impresion digital en papel couche brillante o opaco por unidad $ 500 </p>
@@ -170,45 +185,48 @@
 </section>
 
 
+<h1 id="contacto" class="text-center my-5 px-5">CONTACTANOS</h1>
+
+<form id="contac" action="http://localhost:5000/mailing" method="POST" class="container p-5"> 
+    <h5 class="text-align: left;">Nombre: <input name="nombre" class="form-control" placeholder="Ingrese su Nombre " /></h5>     
+    <h5> Correo: <input class="w-100 form-control" name="correo" 
+    placeholder="Ingrese su correo " /></h5>
+    <h5>Asunto: <input name="asunto" class="form-control" /></h5>      
+    <h5> Mensaje: <br /><textarea id="summernote" name="contenido" class="form-control" cols="30" rows="10"></textarea></h5>
+    <button class="btn btn-primary">Enviar correo</button>    
+</form>
 
 
 
 
 
+<script>      
+$(document).ready(function () {        
+$('#summernote').summernote()      
+})   
+</script>
+   
 
 
 
-
-
-<section id="contacto" class="container-fluid negro p-5">
- <div class="border-bottom border-info my-5"><h2 class="text-center py-2 text-white">Contacto</h2></div> 
-
-<div class=" py-5">
-    <div class="typeform-widget" data-url="https://form.typeform.com/to/W8RuDw6V?typeform-medium=embed-snippet" style="width: 100%; height: 500px;"></div>
-     <script> (function() { var qs,js,q,s,d=document, gi=d.getElementById,
-     ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) { js=ce.call(d,"script");
-     js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() </script>
-</div>
-
-</section>
-<footer id="footer" class="  footer  text-center text-white fs-5 py-2">
+<footer id="footer" class="  footer footer-fixed-top py-0 px-0   text-center text-white fs-5 py-2">
     <div class="row">
         <div class="col-sm-6 fw-bold">YOLIDESING</div>
         <div class="col-sm-6">       
-        
-            <a href="https://twitter.com/" class="text-white me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="fab fa-twitter-square"></i></a>
-            <a href="https://facebook.com/" class="text-white me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+        <!-- Instagram -->
+      <a
+        class="btn btn-link btn-floating btn-lg text-white m-0 aling-center" data-bs-toggle="tooltip" data-bs-placement="top" color="white" title="instagram"
+        href="https://www.instagram.com/yoli_desings/"><i class="fab fa-instagram"></i></a>
+            
         </div>
-    </div>
-
-    
+    </div>  
     
 </footer>
-
+ 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"></script>
-      
+     
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
       crossorigin="anonymous"></script>
@@ -216,31 +234,7 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
       crossorigin="anonymous"></script>
 
-   
 </body>
 
 </html>
-
-<script>
-
-//Para smooth scrolling navbar
-$(function(){
-
-    $("a").click(function(event){
-        if (this.hash !=="") {
-            event.preventDefault();    
-            var gato = this.hash;
-            $("html,body").animate({ scollTop: $(gato).offset().top
-            }, 800, function(){
-                window.location.hash = gato;
-            });   
-        }    
-    }); 
-});
-//Para mostrar tooltips
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
-});
-
-</script>
+    

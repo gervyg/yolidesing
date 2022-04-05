@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+<meta charset="utf-8">
+<meta autor="Gervy Gonzalez">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOLIDESING</title>
+<!--bootstrap 5.0.2-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!--Google Font: lobster-cabin-->
+<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
+<!--Font Awesome 5.15.1-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/static/assets/css/style.css">
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
+<!-- include summernote css/js -->
+  
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />  
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
+</head>
+
+
+
+
+
+
+<body>
+    
+    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light py-0 px-0">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="#"><img src="/static/assets/img/logo.png" width="8%" class="png"> YOLIDESING</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active " aria-current="page" href="#inicio">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#quienesSomos">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="#destacados">Presupuesto</a>
+                </li>
+              <li class="nav-item">
+                    <a class="nav-link  text-right" href="#contacto">Contacto</a>
+              </li>
+              
+              <li class="nav-item">
+                <a class="nav-link " href="./login.handlebars">Ingresar</a>
+                </li>
+              </ul>
+            
+          </div>
+        </div>
+      </nav>
+<header id="inicio">
+<!--carrusel-->
+      <div id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/assets/img/camisas.jpg" class="d-block w-75 mx-auto" alt="carrusel1">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/assets/img/TazonesPersonalizados.png" class="d-block w-75 mx-auto" alt="carrusel2">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/assets/img/plotters.jpeg" class="d-block w-75 mx-auto" alt="carrusel3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+</header>
+
+
+
+<h1 class="text-center my-5">PRODUCTOS</h1>
+<!--card-->
+<section id="destacados" class="container-fluid negro px-5">
+
+    <div class="border-bottom border-info"><h2 class="text-center py-2 text-white">Destacados</h2></div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 ">
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/TazonesPersonalizados.png" class="card-img-top" alt="card1">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Tazones Personalizados</h5>
+              <p class="card-text"> Tazones con tu diseño personalizado en $ 4.500. 
+            </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/PenRoller80.jpg" class="card-img-top" alt="card2">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Pendon Roller 80x200</h5>
+              <p class="card-text">Pendones Roller base de aluminio en tela PVC $28.000 </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/camisas.jpg" class="card-img-top" alt="card3">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Poleras</h5>
+              <p class="card-text"> Poleras polo blancas por un lado. tallas: S   M   L   XL. $ 15.000 </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/FLYERS-R.jpg" class="card-img-top" alt="card4">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Flayer de 10x15 full color</h5>
+              <p class="card-text">Flayer en full color, papel couche de 200gr de 10x15 500 unidades impresas por un lado. $ 25.000 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</section>
+
+
+<section id="destacados" class="container-fluid negro px-5">
+
+    <div class="border-bottom border-info"><h2 class="text-center py-2 text-white">Destacados</h2></div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 ">
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/plotters.jpeg" class="card-img-top" alt="card5">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Impresion de Plotter</h5>
+              <p class="card-text"> Impresiones en plotter, en tela PVC por MT2 $ 5.000. 
+            </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/PUBLICIDAD.jpg" class="card-img-top" alt="card6">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Diseños</h5>
+              <p class="card-text">Te elaboramos tus diseños para lo que necesites. desde $5.000 </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/BusinessFLyers.jpg" class="card-img-top" alt="card7">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Tarjetas</h5>
+              <p class="card-text"> Tarjetas 100 unidades, papel couche 300gr Full color, impresas por un lado. $ 5.000 </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <img src="/static/assets/img/53.jpg" class="card-img-top" alt="card8">
+            <div class="card-body bg-info">
+              <h5 class="card-title">Impresiones Digitales</h5>
+              <p class="card-text">Impresion digital en papel couche brillante o opaco por unidad $ 500 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</section>
+
+
+<h1 class="text-center my-5 px-5">CONTACTANOS</h1>
+
+<form  action="http://localhost:5000/mailing" method="POST" class="container p-5"> 
+    <h5>Nombre: <input name="nombre" class="form-control" placeholder="Ingrese su Nombre " /></h5>     
+    <h5> Correo: <input class="w-100 form-control" name="correo" 
+    placeholder="Ingrese su correo " /></h5>
+    <h5>Asunto: <input name="asunto" class="form-control" /></h5>      
+    <h5> Mensaje: <br /><textarea id="summernote" name="contenido" class="form-control" cols="30" rows="10"></textarea></h5>
+    <button class="btn btn-primary">Enviar correo</button>    
+</form>
+
+
+
+
+
+<script>      
+$(document).ready(function () {        
+$('#summernote').summernote()      
+})   
+</script>
+   
+
+
+
+<footer id="footer" class="  footer  text-center text-white fs-5 py-2">
+    <div class="row">
+        <div class="col-sm-6 fw-bold">YOLIDESING</div>
+        <div class="col-sm-6">       
+        
+            <a href="https://twitter.com/" class="text-white me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="fab fa-twitter-square"></i></a>
+            <a href="https://facebook.com/" class="text-white me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="fab fa-facebook-square"></i></a>
+        </div>
+    </div>
+
+    
+    
+</footer>
+ 
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+     
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+      crossorigin="anonymous"></script>
+
+</body>
+
+</html>

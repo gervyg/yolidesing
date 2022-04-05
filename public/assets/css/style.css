@@ -1,8 +1,30 @@
 .navbar {
  background-color:  #B589C0;
+ text-align: left;
 }
 
 
-.footer {
+body {
+    
+    text-shadow: 0px 0px 1px black;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 40px 100px;
+    
+  }
+
+
+  #contac{
+    text-align: left;
+
+
+  }
+
+#footer {
     background-color:  #B589C0; 
+    text-align: left;
+    margin-top:0px;
+    width:100%;
+    
+    
 }
