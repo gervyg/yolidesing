@@ -6,20 +6,21 @@ const fs = require('fs')
 const axios = require('axios')
 const mail = require('../mailer')
 
-//const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
-//const secretKey = "12346";
+const secretKey = "12346";
 //console.log(secretKey)
 
 const router = Router()
 
 //**Rutas handlebars*/
 router.get('/', async (req, res) => {
-   // const user = await db.getskaters()
-   res.render("index", {
-    layout: "main"
+    const user = await db.getcliente()
+    res.render('index', { user })
+    
+
 });
-})
+
 
 router.post('/mailing', async (req, res) => {   
     const { nombre, correo, asunto, contenido } = req.body;    
@@ -35,6 +36,34 @@ router.get('/login', async (req, res) => {
     });
 })
 
+//Verificando token
+const Verificar = (req, res, next) => {
+    let { token } = req.query;
+    jwt.verify(token, secretKey, (err, decoded) => {
+        if (err) {
+            res.status(401).send({
+                error: "401 No Autorizado",
+                message: err.message,
+            })
+        } else {
+            req.user = decoded;
+            next();
+        };
+
+
+    })
+};
+
+router.get('/administrar', Verificar, async (req, res) => {
+    const user = await db.getcliente()
+
+    res.render("index", {
+        layout: "administrar",
+        user: user
+    });
+
+})
+
 router.get('/cliente', async (req, res) => {
     res.render("index", {
         layout: "registro"
@@ -44,7 +73,52 @@ router.get('/cliente', async (req, res) => {
 
 
 
+router.get('/cliente/presupuesto', async (req, res) => {
+    const productos = await db.productos()
+    res.render("index", {
+        layout: "presupuesto",
+        productos: productos
+    });
+})
 
+
+
+router.get('/cliente/presupuesto/lista', async (req, res) => {
+    res.render("index", {
+        layout: "listapresupuesto"
+    });
+})
+
+router.get('/SignIn', async (req, res) => {
+    const { email, password } = req.query;
+    const user = await db.clienteInicio(email, password)
+
+    if (user.length != 0) {
+        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 120, data: user[0], },
+            secretKey
+
+        );
+
+        if (email == "adminyoli@gmail.com") {
+            res.send(` 
+                <script>
+                localStorage.setItem('token', JSON.stringify('${token}'))
+                window.location.href = "/administrar?token=${token}";
+                </script>
+            `);
+        } else {
+            res.send(` 
+                <script>
+                localStorage.setItem('token', JSON.stringify('${token}'))
+                window.location.href = "/cliente/presupuesto?token=${token}";
+                </script>
+            `);
+        }
+
+    } else {
+        res.send("Usuario o contraseña incorrecta");
+    }
+});
 
 
 

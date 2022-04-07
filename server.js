@@ -22,7 +22,7 @@ app.use(expressFileUpload({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(front)
-//app.use(api)
+app.use(api)
 
 
 const port = 5000 //process.env.PORT || 5000
@@ -37,6 +37,8 @@ app.engine(
         partialsDir: __dirname + '/views/'
     })
 );
+
+
 app.set('view engine', 'handlebars');
 
 

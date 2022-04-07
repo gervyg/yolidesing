@@ -9,22 +9,65 @@ body {
     text-shadow: 0px 0px 1px black;
     font-family: sans-serif;
     text-align: center;
-    padding: 40px 100px;
+    
     
   }
 
+#carouselExampleControls{
+  padding: 40px 100px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#destacados{
+  padding: 40px 100px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#imgTable{
+height: 150px;
+width: 30px;
+width: 100%;
+}
+#tabla{
+  float: center;
+}
+#tituloprod{
+  text-align: left;
+ 
+  
+}
 
   #contac{
     text-align: left;
-
+    padding: 40px 100px;
 
   }
 
 #footer {
     background-color:  #B589C0; 
     text-align: left;
-    margin-top:0px;
-    width:100%;
+    align-self: left;
     
     
+}
+
+#btnlista{
+  text-align: right;
+  padding: 40px 100px;
+}
+#containerpresu{
+  padding: 40px 100px;
+  text-align: center;
+  background-color:  #43badf;
+}
+
+#icodel{
+  align-self: right;
+  float: right;
+}
+
+#totales{
+  float: right;
 }
