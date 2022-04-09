@@ -1,67 +1,12 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
-<head>
-<meta charset="utf-8">
-<meta autor="Gervy Gonzalez">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOLIDESING</title>
-<!--bootstrap 5.0.2-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!--Google Font: lobster-cabin-->
-<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
-<!--Font Awesome 5.15.1-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
-<link rel="stylesheet" href="/static/assets/css/style.css">
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
-<!-- include summernote css/js -->
-  
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />  
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  
-</head>
-
-
-
-
-
+{{> head}}
 
 <body>
-    
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light py-0 px-0">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="#"><img src="/static/assets/img/logo.png" width="8%" class="png"> YOLIDESING</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active " aria-current="page" href="#inicio">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="#productos">Productos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="././login">Presupuesto</a>
-                </li>
-              <li class="nav-item">
-                    <a class="nav-link  text-right" href="#contacto">Contacto</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link " href="././login">Ingresar</a>
-                </li>
-              </ul>
-            
-          </div>
-        </div>
-      </nav>
+  
+{{> encabezado inicio=true}}
+
 <header id="inicio">
 <!--carrusel-->
       <div id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel">
@@ -87,20 +32,29 @@
       </div>
 </header>
 
+<div id="quienes1">
+<div id="quienes" class="container my-5">
+  <h1 class="text-center my-5" >¿Quiénes Somos?</h1>
+<p>Es momento de poner en marcha tus ideas.
+  Te ofrecemos el apoyo necesario para proyectar tus ideas, que te ayudará a realzar tu negocio, 
+  desde la creacion del logo de tu empresa, hasta material POP.
+  
+  <span class="textYoliDs">YoliDesings</span> tiene para ti, diseños personalizados, adaptados a sus necesidades, tomando en cuenta tus ideas.</p>
+</div>
+</div>
 
-
-<h1 id="productos" class="text-center my-5">PRODUCTOS</h1>
 <!--card-->
 <section id="destacados" class="container-fluid negro px-5">
 
-    <div class="border-bottom border-info"><h2 class="text-center py-2 text-white">Destacados</h2></div>
+    <div class="border-bottom border-info"><h1 class="text-center py-2 bgazul text-white">Productos Destacados</h1></div>
 
-    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 ">
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5">
+      
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/TazonesPersonalizados.png" class="card-img-top" alt="card1">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Tazones Personalizados</h5>
+            <img src="/static/assets/img/TazonesPersonalizados.png" class="img-fluid card-img-top" alt="card1">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Tazones Personalizados</h5>
               <p class="card-text"> Tazones con tu diseño personalizado en $ 4.500. 
             </p>
             </div>
@@ -108,46 +62,41 @@
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/PenRoller80.jpg" class="card-img-top" alt="card2">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Pendon Roller 80x200</h5>
+            <img src="/static/assets/img/PenRoller80.jpg" class="img-fluid card-img-top" alt="card2">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Pendon Roller 80x200</h5>
               <p class="card-text">Pendones Roller base de aluminio en tela PVC $28.000 </p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/camisas.jpg" class="card-img-top" alt="card3">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Poleras</h5>
+            <img src="/static/assets/img/camisas.jpg" class="img-fluid card-img-top" style="min-height: 293px;" alt="card3">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Poleras</h5>
               <p class="card-text"> Poleras polo blancas por un lado. tallas: S   M   L   XL. $ 15.000 </p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/FLYERS-R.jpg" class="card-img-top" alt="card4">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Flayer de 10x15 full color</h5>
+            <img src="/static/assets/img/FLYERS-R.jpg" class="img-fluid card-img-top" alt="card4">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Flayer de 10x15 full color</h5>
               <p class="card-text">Flayer en full color, papel couche de 200gr de 10x15 500 unidades impresas por un lado. $ 25.000 </p>
             </div>
           </div>
         </div>
+        
       </div>
 
-</section>
 
-
-<section id="destacados" class="container-fluid negro px-5">
-
-    <div class="border-bottom border-info"><h2 class="text-center py-2 text-white">Destacados</h2></div>
-
-    <div class="row row-cols-1 row-cols-md-4 g-4 mt-5 ">
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-5 ">
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/plotters.jpeg" class="card-img-top" alt="card5">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Impresion de Plotter</h5>
+            <img src="/static/assets/img/plotters.jpeg" class="card-img-top" style="min-height: 293px;"alt="card5">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Impresion de Plotter</h5>
               <p class="card-text"> Impresiones en plotter, en tela PVC por MT2 $ 5.000. 
             </p>
             </div>
@@ -155,27 +104,27 @@
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/PUBLICIDAD.jpg" class="card-img-top" alt="card6">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Diseños</h5>
+            <img src="/static/assets/img/PUBLICIDAD.jpg" class="card-img-top" style="min-height: 293px;" alt="card6">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Diseños</h5>
               <p class="card-text">Te elaboramos tus diseños para lo que necesites. desde $5.000 </p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/BusinessFLyers.jpg" class="card-img-top" alt="card7">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Tarjetas</h5>
+            <img src="/static/assets/img/BusinessFLyers.jpg" class="card-img-top" style="min-height: 293px;" alt="card7">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Tarjetas</h5>
               <p class="card-text"> Tarjetas 100 unidades, papel couche 300gr Full color, impresas por un lado. $ 5.000 </p>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card h-100">
-            <img src="/static/assets/img/53.jpg" class="card-img-top" alt="card8">
-            <div class="card-body bg-info">
-              <h5 class="card-title">Impresiones Digitales</h5>
+            <img src="/static/assets/img/53.jpg" class="card-img-top" style="min-height: 293px;"alt="card8">
+            <div class="card-body bgazul">
+              <h5 class="card-title textYoliDs">Impresiones Digitales</h5>
               <p class="card-text">Impresion digital en papel couche brillante o opaco por unidad $ 500 </p>
             </div>
           </div>
@@ -184,44 +133,24 @@
 
 </section>
 
-
-<h1 id="contacto" class="text-center my-5 px-5">CONTACTANOS</h1>
-
-<form id="contac" action="http://localhost:5000/mailing" method="POST" class="container p-5"> 
-    <h5 class="text-align: left;">Nombre: <input name="nombre" class="form-control" placeholder="Ingrese su Nombre " /></h5>     
-    <h5> Correo: <input class="w-100 form-control" name="correo" 
-    placeholder="Ingrese su correo " /></h5>
-    <h5>Asunto: <input name="asunto" class="form-control" /></h5>      
-    <h5> Mensaje: <br /><textarea id="summernote" name="contenido" class="form-control" cols="30" rows="10"></textarea></h5>
-    <button class="btn btn-primary">Enviar correo</button>    
+<h1 id="contacto" class="text-center my-5 px-5">Contáctanos</h1>
+<section id="contac"  >
+<form action="/mailing" method="POST" class="container p-5"> 
+    <h5 class="text-start" >Nombre: <input name="nombre" class="form-control" placeholder="Ingrese su Nombre " /></h5>     
+    <h5 class="text-start"> Correo: <input class="w-100 form-control" name="correo" placeholder="Ingrese su correo " /></h5>
+    <h5 class="text-start">Asunto: <input name="asunto" class="form-control" /></h5>      
+    <h5 class="text-start"> Mensaje: <br /><textarea id="summernote" name="contenido" class="form-control" cols="30" rows="10"></textarea></h5>
+    <button class="btn text-white text-center" id="btnenviar" >Enviar correo</button>    
 </form>
-
-
-
-
+</section>
 
 <script>      
-$(document).ready(function () {        
-$('#summernote').summernote()      
-})   
-</script>
-   
+  $(document).ready(function () {  
+    $('#summernote').summernote();        
+  })   
+</script>   
 
-
-
-<footer id="footer" class="  footer footer-fixed-top py-0 px-0   text-center text-white fs-5 py-2">
-    <div class="row">
-        <div class="col-sm-6 fw-bold">YOLIDESING</div>
-        <div class="col-sm-6"    style="width: 25%" ;>       
-        <!-- Instagram -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-white m-0 aling-center" data-bs-toggle="tooltip" data-bs-placement="top" color="white" title="instagram"
-        href="https://www.instagram.com/yoli_desings/"><i class="fab fa-instagram"></i></a>
-            
-        </div>
-    </div>  
-    
-</footer>
+{{> footer}}
  
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="

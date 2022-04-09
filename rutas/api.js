@@ -18,7 +18,14 @@ router.post('/clientes', async (req, res) => {
     res.send(user);    
 
 })
+//Editar
+router.put('/clientes/editar/:id', async (req, res) => {    
+    
+    const {id, rut, nombre, password, direccion , telefono } = req.body;   
+    const user = await db.clientEditar(id, rut, nombre, password, telefono, direccion )
+    res.send(user);    
 
+})
 
 router.get('/productos', async (req, res) => {
     const productos = await db.productos()

@@ -1,67 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 
-<head>
-<meta charset="utf-8">
-<meta autor="Gervy Gonzalez">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOLIDESING</title>
-<!--bootstrap 5.0.2-->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<!--Google Font: lobster-cabin-->
-<link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&family=Lobster&display=swap" rel="stylesheet">
-<!--Font Awesome 5.15.1-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
-<link rel="stylesheet" href="/static/assets/css/style.css">
-<script src="https://kit.fontawesome.com/23455c5ab2.js" crossorigin="anonymous"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" crossorigin="anonymous">
-<!-- include summernote css/js -->
-  
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet" />  
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-  
-</head>
-
-
-
-
-
+{{>head}}
 
 <body>
     
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-light py-0 px-0">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" href="#"><img src="/static/assets/img/logo.png" width="8%" class="png"> YOLIDESING</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active " aria-current="page" href="/">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="/">Productos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link " href="./cliente/presupuesto">Presupuesto</a>
-                </li>
-              <li class="nav-item">
-                    <a class="nav-link  text-right" href="/">Contacto</a>
-              </li>
-              
-              <li class="nav-item">
-                <a class="nav-link " href="././login">Ingresar</a>
-                </li>
-              </ul>
-            
-          </div>
-        </div>
-      </nav>
+{{> encabezado sesion=true}}
 
    
 <h1 class="text-alig-center py-5 px-5 my-5  ">SOLICITUD DE PRESUPUESTO</h1>
@@ -183,39 +127,25 @@
 
 
 
-
-
-
-
-
-   
-
-
-
-<footer id="footer" class="  footer footer-fixed-top py-0 px-0   text-center text-white fs-5 py-2 " >
-    <div class="row col-sm-12">
-        <div class="col-sm-6 fw-bold">YOLIDESING</div>
-        <div class="col-sm-6"    >       
-        <!-- Instagram -->
-      <a
-        class="btn btn-link btn-floating btn-lg text-white m-0 aling-center" data-bs-toggle="tooltip" data-bs-placement="top" color="white" title="instagram"
-        href="https://www.instagram.com/yoli_desings/"><i class="fab fa-instagram"></i></a>
-            
-        </div>
-    </div>  
-    
-</footer>
+{{>footer}}
  
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"></script>
-     
+
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
       crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+      
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+     crossorigin="anonymous">
+      
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
       crossorigin="anonymous"></script>
+
+      
 
 </body>
 
@@ -229,6 +159,8 @@ const productosSeleccionados =  new Set ();
 const agregarProducto = (id, foto, articulo, precio) =>{
   productosSeleccionados.add(id)
   console.log(id)
+  console.log(articulo)
+  console.log(precio)
   console.log(foto)
   const obj = {
     id: id,
@@ -237,7 +169,7 @@ const agregarProducto = (id, foto, articulo, precio) =>{
     precio:precio,
     cantidad: 1
   }
-  productosSeleccionados.push(obj);
+  productosSeleccionados.add(obj);
 
 }
 

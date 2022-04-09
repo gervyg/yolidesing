@@ -34,7 +34,7 @@ app.engine(
     'handlebars',
     exphbs.engine({
         layoutsDir: __dirname + '/views/layouts',
-        partialsDir: __dirname + '/views/'
+        partialsDir: __dirname + '/views/layouts'
     })
 );
 

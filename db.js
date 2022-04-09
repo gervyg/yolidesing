@@ -75,8 +75,28 @@ const clienteCrear = async (rut, nombre, email, password, direccion ,telefono ) 
 
 }
 
+// Editando Cliente
+const clientEditar = async (id, rut, nombre, password, telefono ,direccion) => { 
+    const client = new Client({
+     connectionString: process.env.DATABASE_URL,
+     ssl: {
+     rejectUnauthorized: false
+     }
+     })
+
+ await client.connect() 
+ const res = {
+    text: `UPDATE cliente SET rut = $2, nombre = $3, password = $4, direccion= $6, telefono= $5 WHERE id = $1`,
+    values: [id, rut, nombre, password, telefono, direccion ]
+}  
+const result = await client.query(res);
+ await client.end()
+ return result;
+
+}
 
 
+      
 
 
 
@@ -113,4 +133,4 @@ const productoCrear = async (articulo, precio, descripcion, foto, estado ) => {
 
 
 
-module.exports = { getcliente, clienteInicio, clienteCrear, productos }
+module.exports = { getcliente, clienteInicio, clienteCrear, productos,clientEditar }

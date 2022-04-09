@@ -16,8 +16,7 @@ const router = Router()
 //**Rutas handlebars*/
 router.get('/', async (req, res) => {
     const user = await db.getcliente()
-    res.render('index', { user })
-    
+    res.render('index', { user })   
 
 });
 
@@ -70,7 +69,28 @@ router.get('/cliente', async (req, res) => {
     });
 })
 
+router.get('/cliente/main', async (req, res) => {
+    res.render("index", {
+        layout: "main"
+    });
+})
 
+router.get('/cliente/login', async (req, res) => {
+    res.render("index", {
+        layout: "login"
+    });
+})
+router.get('/cliente/listapresupuesto', async (req, res) => {
+    res.render("index", {
+        layout: "listapresupuesto"
+    });
+})
+router.get('/cliente/editar', async (req, res) => {console.log("llegue a editar front")
+    res.render("index", {
+        layout: "editar",
+        id: req.params.id
+    });
+})
 
 
 router.get('/cliente/presupuesto', async (req, res) => {
