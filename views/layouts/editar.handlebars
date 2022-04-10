@@ -12,7 +12,7 @@
 
 
     <div class="py-4 ">
-      <h2 class="text-center mx-5 my-5" >ACTUALIZA TUS DATOS</h2>
+      <h1 class="text-center mx-5 my-5 py-5" >Actualiza tus Datos</h1>
       <hr class="w-50" style="margin: 2rem 335px;">
       <form id="formEdit" class="text-center">
         <div class="form-group row w-50 m-auto aling-center">
@@ -47,9 +47,8 @@
          
           
         </div>
-        <button type="button" onclick="irEdit()" class="btn btn-info mb-3 mx-5 my-5">Actualizar</button>
-        
-      </form>
+        <button id="btnenviar" type="button" onclick="irEdit()" class="btn btn-info mb-3 mx-5 my-5 text-white">Actualizar</button>
+        </form>
     </div>
 
 
@@ -125,7 +124,7 @@ $(document).ready(function () {
           alert("Cambios Guardados")
         }, (error) => {
           console.log(error);
-          alert("Disculpe hubo un error editando")
+          alert("Disculpe hubo un error en los Cambios")
         });
     }
   }
