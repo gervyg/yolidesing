@@ -85,7 +85,7 @@ router.get('/cliente/listapresupuesto', async (req, res) => {
         layout: "listapresupuesto"
     });
 })
-router.get('/cliente/editar', async (req, res) => {console.log("llegue a editar front")
+router.get('/cliente/editar', async (req, res) => {console.log("llegue a editar")
     res.render("index", {
         layout: "editar",
         id: req.params.id
@@ -136,8 +136,10 @@ router.get('/SignIn', async (req, res) => {
         }
 
     } else {
-        res.send("Usuario o contraseña incorrecta");
-    }
+        res.send(`<script>  alert("Email o contraseña inválida.")      
+        window.location.href = "/cliente/login";        
+        </script>`
+        )};
 });
 
 

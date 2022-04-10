@@ -100,7 +100,7 @@ const result = await client.query(res);
 
 
 
-const presupuestoCreate = async (fecha_de_emision, fecha_de_validez, fecha_probable_de_entrega, precio_total, observaciones_cliente, observaciones_admin, estado) => {
+const presupuestoCrear = async (fecha_de_emision, fecha_de_validez, precio_total, observaciones_cliente, estado) => {
     const client = new Client({
      connectionString: process.env.DATABASE_URL,
      ssl: {
@@ -110,7 +110,7 @@ const presupuestoCreate = async (fecha_de_emision, fecha_de_validez, fecha_proba
 
  await client.connect()
  const res = await client.query(`INSERT INTO cliente (fecha_de_emision, fecha_de_validez,  precio_total, observaciones_cliente,  estado) 
- VALUES ('${fecha_de_emision}', '${fecha_de_validez}' , '${precio_total}', '${observaciones_cliente}',  '${estado}' );`);
+ VALUES ( NOW(), NOW + interval'3 D' , '${precio_total}', '${observaciones_cliente}',  '${estado}' );`);
  await client.end()
  return res.rows;
 

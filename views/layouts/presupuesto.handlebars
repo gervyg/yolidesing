@@ -8,15 +8,15 @@
 {{> encabezado sesion=true}}
 
    
-<h1 class="text-alig-center py-5 px-5 my-5  ">SOLICITUD DE PRESUPUESTO</h1>
+<h1 class="text-alig-center py-5 px-5 my-5 mx-5 " style="padding-top: 6rem!important;">Solicitud De Presupuesto</h1>
 
 <section>
   <div class="row col-sm-12">
     
 <div  id="btnlista"class="col-sm-12 mx-5 py-5">
-   <button  class="butoon-primary text aling-left">LISTA DE PRODUCTOS</button>
-   <button>
-   <a class="butoon-primary text aling-left" href="/cliente/presupuesto/lista"> <i class="fa-solid fa-magnifying-glass"></i>LISTA DE PRESUPUESTOS</a>
+   <button id="btnenviar" class="butoon-primary text aling-left text-white">LISTA DE PRODUCTOS</button>
+   <button id="btnenviar">
+   <a  class="butoon-primary text aling-left text-white" href="/cliente/presupuesto/lista"> <i class="fa-solid fa-magnifying-glass"></i>LISTA DE PRESUPUESTOS</a>
    </button>
    </div>
    </div> 
@@ -53,8 +53,7 @@
                    <td><div> <a> <img id="imgTable" class="imgTable" src="/static/assets/img/{{this.foto}}" alt=""> </a> </div></td>
                    <th>{{this.articulo}}</th>               
                   <td>{{this.precio}}</td>
-                  <td>{{this.descripcion}}</td>
-                  
+                  <td>{{this.descripcion}}</td>                  
                   <td> <button class="btn-primary" onclick="agregarProducto('{{id}}','{{foto}}','{{articulo}}','{{this.precio}}')">+</button> </td>
                                    
               </tr>
@@ -67,39 +66,13 @@
 </div>
 
 
-<div id="containerpresu" class="container-fluid mx-0 row col-sm-12 aling-left">
-{{#each productosSeleccionados}}   
-  
-  <div class="col-sm-4" >  
-    <img src="/static/assets/img/PenRoller80.jpg" style="width: 30%;" alt="Roler de 80">
-  </div> 
-  <div class="col-sm-4" >
-          <h2>{{this.articulo}}</h2>
-          <p>$28.000</p>
-          
-  </div>   
-<div class="col-sm-4" >
-  <p id="cantidad" class="aling-right">Cantidad {{this.cantidad}}</p>  
-    <div id="icodel" ><i class="fa-solid fa-trash-can"></i></div>
-  
-</div>
-
-{{/each}}  
-</div>
-
-
-
-
-
-
-
-
+<div id="containerpresu" class="container-fluid mx-0 row col-sm-12 aling-left"></div>
 
 
 <section id="observacion" class="col-sm-12 alig-center mx-5 py-5">
 
 <div class="col-sm-6 mx-auto">
-<textarea  name="observacion" class="form-control" cols="15" rows="5">Observacion:</textarea>
+<textarea  name="observacion" class="form-control" cols="15" rows="5">Observacion: </textarea>
 </div>
 
 </section>
@@ -119,8 +92,8 @@
 <section class="row col-sm-12  mx-auto py-5">
 <div class="col-sm-6 mx-auto">
 
-<button type="submit" class="btn btn-info mb-3 my-5">ACEPTAR</button>
-<button type="button" class="btn btn-info mb-3 my-5">CANCELAR</button>
+<button id="btnenviar" type="submit" class="btn btn-info mb-3 my-5 text-white">ACEPTAR</button>
+<button id="btnenviar" type="button" class="btn btn-info mb-3 my-5 text-white">CANCELAR</button>
 </div>
 
 </section>
@@ -155,13 +128,10 @@
 
 <script>
 
-const productosSeleccionados =  new Set (); 
+const productosSeleccionados =  new Set();   
+
 const agregarProducto = (id, foto, articulo, precio) =>{
-  productosSeleccionados.add(id)
-  console.log(id)
-  console.log(articulo)
-  console.log(precio)
-  console.log(foto)
+ 
   const obj = {
     id: id,
     foto:foto,
@@ -169,7 +139,49 @@ const agregarProducto = (id, foto, articulo, precio) =>{
     precio:precio,
     cantidad: 1
   }
-  productosSeleccionados.add(obj);
+
+  const noDulplicar = Array.from(productosSeleccionados).filter(element => element.id === id);
+  if(noDulplicar.length == 0){
+    productosSeleccionados.add(obj);
+  }else{
+    noDulplicar[0].cantidad = noDulplicar[0].cantidad +1;
+  }
+  
+  let div = document.getElementById("containerpresu");
+  div.innerHTML = ""; 
+  productosSeleccionados.forEach((producto, indice) => {
+        div.innerHTML +=`<div class="col-sm-4" >  
+              <img id="imgTable" class="imgTable" src="/static/assets/img/${producto.foto}" alt="">
+            </div> 
+            <div class="col-sm-4" >
+                    <h2>${producto.articulo}</h2>
+                    <p>${producto.precio}</p>
+            </div>   
+            <div class="col-sm-4" >
+              <p id="cantidad" class="aling-right">Cantidad ${producto.cantidad}</p>  
+                <div id="icodel" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
+            </div>`});
+  
+}; 
+
+const eliminarProducto = (id) =>{
+    
+  const busqueda = Array.from(productosSeleccionados).filter(element => element.id === id);
+  productosSeleccionados.delete(busqueda[0]);
+  let div = document.getElementById("containerpresu");
+  div.innerHTML = ""; 
+  productosSeleccionados.forEach((producto, indice) => {
+        div.innerHTML +=`<div class="col-sm-4" >  
+              <img id="imgTable" class="imgTable" src="/static/assets/img/${producto.foto}" alt="">
+            </div> 
+            <div class="col-sm-4" >
+                    <h2>${producto.articulo}</h2>
+                    <p>${producto.precio}</p>
+            </div>   
+            <div class="col-sm-4" >
+              <p id="cantidad" class="aling-right">Cantidad ${producto.cantidad}</p>  
+                <div id="icodel" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
+            </div>`});
 
 }
 
