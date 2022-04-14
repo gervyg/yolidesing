@@ -6,7 +6,7 @@ let transporter = nodemailer.createTransport({
                 secure: false,
                 auth: {
                     user: 'yolidesing8@gmail.com',
-                    pass: 'yolisophia',
+                    pass: 'yolisophi',
 
                 },
 
@@ -16,18 +16,14 @@ let transporter = nodemailer.createTransport({
 
             })
 
-async function enviar(nombre, correo, asunto, contenido) {
+async function enviar(asunto, contenido) {
     return new Promise((resolve, reject) => {
    
             let mailOptions = {
                 from: 'yolidesing8@gmail.com',
                 to:'yolidesing8@gmail.com',
                 subject: asunto,
-                html: `${nombre}, 
-                       <br>
-                       ${correo}, 
-                       <br>
-                       ${contenido}` 
+                html: contenido
             }
 
             transporter.sendMail(mailOptions, (err, data) => {
@@ -47,4 +43,6 @@ async function enviar(nombre, correo, asunto, contenido) {
 }
 
 
-module.exports = enviar
+
+
+module.exports = { enviar}

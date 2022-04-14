@@ -14,67 +14,60 @@
   <div class="row col-sm-12">
     
 <div  id="btnlista"class="col-sm-12 mx-5 py-5">
-   <button id="btnenviar" class="butoon-primary text aling-left text-white">LISTA DE PRODUCTOS</button>
+   <button id="btnenviar" class="butoon-primary text aling-left text-white " onclick="ocultar()">LISTA DE PRODUCTOS</button>
    <button id="btnenviar">
-   <a  class="butoon-primary text aling-left text-white" href="/cliente/presupuesto/lista"> <i class="fa-solid fa-magnifying-glass"></i>LISTA DE PRESUPUESTOS</a>
+   <a  class="butoon-primary text aling-left text-white"  onclick="irListap()"> <i class="fa-solid fa-magnifying-glass"></i>LISTA DE PRESUPUESTOS</a>
    </button>
    </div>
    </div> 
 </section>
 
-
+<div id="desaparecer">
 <section class="col-sm-12">
-<div  >
-<h5 id="tituloprod" class="text-center" >PRODUCTOS</h5>
+<div>
+<h1 id="tituloprod" class="text-center py-5" >Productos</h1>
 </div>
 </section>
 
 
-<div  class="container col-sm-12" >  
-<div id="items" class="row ">
-  <main  class=" row align-center"></main>
-  <aside class="col-sm-12" >
-<table id="tabla" class="table table-dark ">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col"></th>
-            <th scope="col">Articulo</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Descripcion</th>                    
-            <th scope="col">Seleccion de Producto</th>
-          </tr>
-        </thead>
-        <tbody>
-         
-          {{#each productos}}
-              <tr>
-                  <th>{{this.id}}</th>  
-                   <td><div> <a> <img id="imgTable" class="imgTable" src="/static/assets/img/{{this.foto}}" alt=""> </a> </div></td>
-                   <th>{{this.articulo}}</th>               
-                  <td>{{this.precio}}</td>
-                  <td>{{this.descripcion}}</td>                  
-                  <td> <button class="btn-primary" onclick="agregarProducto('{{id}}','{{foto}}','{{articulo}}','{{this.precio}}')">+</button> </td>
-                                   
-              </tr>
-          {{/each}}
-        </tbody>
-      </table>
-      
-      </aside>
-</div>
+{{#each productos}}
+
+
+<div id="cardProducto"  class="card col-5 mb-6 mx-5 my-1 float-start" >
+  <div class="row g-0">
+    <div class="col-md-4 ">
+      <img id="imgTable" class="img-fluid card-img-top" src="/static/assets/img/{{this.foto}}" style="min-height: 206px;" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{this.articulo}}</h5>
+        <p class="card-text">{{this.descripcion}}</p>
+        <p class="card-text">Precio:$ {{this.precio}}</p>
+        <button id="btnenviar" class="btn text-white" onclick="agregarProducto('{{id}}','{{foto}}','{{articulo}}','{{this.precio}}')">Agregar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
+{{/each}}
 
-<div id="containerpresu" class="container-fluid mx-0 row col-sm-12 aling-left"></div>
+</div>
+
+<section >
+  <div class="container-fluid mx-5 my-5 float-start">
+<h1 >Productos Seleccionados</h1>
+</div>
+</section>
 
 
-<section id="observacion" class="col-sm-12 alig-center mx-5 py-5">
+<div id="containerpresu" class="container-fluid g-3 mx-0 row col-sm-12 text-white"></div>
 
+
+<section  class="col-sm-12 alig-center mx-5 py-5">
 <div class="col-sm-6 mx-auto">
-<textarea  name="observacion" class="form-control" cols="15" rows="5">Observacion: </textarea>
+  <p style="text-align: left;">Observacion:</p>
+<textarea  name="observacion" id="observacion" class="form-control" cols="15" rows="5"> </textarea>
 </div>
-
 </section>
 
 
@@ -82,9 +75,9 @@
 <p class="aling-left mx-5 py-5">Nota: Presupuesto válido por tres dias a contar de la fecha de emisión </p>
 
 <div id="totales" class=" col-sm-6 mx-5 px-5 " >
-<p class="text-right">Total Neto: <span id="totalneto"></span>$</p>
-<p class="text-right">Iva: <span id="iva"></span>$</p>
-<p class="text-right">Total: <span id="total"></span>$</p>
+<p class="text-right">Total Neto: $<span id="totalNeto"></span></p>
+<p class="text-right">Iva: $<span id="iva"></span></p>
+<p class="text-right">Total: $<span id="total"></span></p>
 </div>
 </section>
 
@@ -92,7 +85,7 @@
 <section class="row col-sm-12  mx-auto py-5">
 <div class="col-sm-6 mx-auto">
 
-<button id="btnenviar" type="submit" class="btn btn-info mb-3 my-5 text-white">ACEPTAR</button>
+<button id="btnenviar" type="submit" onclick="presupuestoCrear()" class="btn btn-info mb-3 my-5 text-white">ACEPTAR</button>
 <button id="btnenviar" type="button" class="btn btn-info mb-3 my-5 text-white">CANCELAR</button>
 </div>
 
@@ -128,7 +121,13 @@
 
 <script>
 
-const productosSeleccionados =  new Set();   
+  $(document).ready(function () {   
+    var rut;     
+    const token= JSON.parse(localStorage.getItem('token'));  
+    decTk(token);   
+  });   
+
+const productosSeleccionados =  []; 
 
 const agregarProducto = (id, foto, articulo, precio) =>{
  
@@ -142,7 +141,7 @@ const agregarProducto = (id, foto, articulo, precio) =>{
 
   const noDulplicar = Array.from(productosSeleccionados).filter(element => element.id === id);
   if(noDulplicar.length == 0){
-    productosSeleccionados.add(obj);
+    productosSeleccionados.push(obj);
   }else{
     noDulplicar[0].cantidad = noDulplicar[0].cantidad +1;
   }
@@ -150,39 +149,103 @@ const agregarProducto = (id, foto, articulo, precio) =>{
   let div = document.getElementById("containerpresu");
   div.innerHTML = ""; 
   productosSeleccionados.forEach((producto, indice) => {
-        div.innerHTML +=`<div class="col-sm-4" >  
-              <img id="imgTable" class="imgTable" src="/static/assets/img/${producto.foto}" alt="">
+        div.innerHTML +=`<div class="col-sm-4" id="contpresu" >  
+              <img  class="imgTable" src="/static/assets/img/${producto.foto}"  alt="">
             </div> 
-            <div class="col-sm-4" >
+            <div class="col-sm-4" id="contpresu" >
                     <h2>${producto.articulo}</h2>
-                    <p>${producto.precio}</p>
+                    <p>Precio: $${producto.precio}</p>
             </div>   
-            <div class="col-sm-4" >
-              <p id="cantidad" class="aling-right">Cantidad ${producto.cantidad}</p>  
-                <div id="icodel" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
-            </div>`});
+            <div class="col-sm-4" id="contpresu">    <br>
+              <p id="cantidad" class="col-sm-6">Cantidad:</p>             
+              <p class="col-sm-6">${producto.cantidad}</p> 
+             <br><div id="icodel" class="col-sm-6" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
+            </div> 
+            `});
   
+  calcularTotal();
 }; 
 
 const eliminarProducto = (id) =>{
     
-  const busqueda = Array.from(productosSeleccionados).filter(element => element.id === id);
-  productosSeleccionados.delete(busqueda[0]);
+  const busqueda = Array.from(productosSeleccionados).findIndex(element => element.id === id);
+  productosSeleccionados.splice( busqueda[0], 1);
   let div = document.getElementById("containerpresu");
   div.innerHTML = ""; 
   productosSeleccionados.forEach((producto, indice) => {
-        div.innerHTML +=`<div class="col-sm-4" >  
-              <img id="imgTable" class="imgTable" src="/static/assets/img/${producto.foto}" alt="">
+        div.innerHTML +=`<div class=" col-sm-4" id="contpresu" >  
+              <img  class="imgTable" src="/static/assets/img/${producto.foto}"  alt="">
             </div> 
-            <div class="col-sm-4" >
+            <div class="col-sm-4" id="contpresu" >
                     <h2>${producto.articulo}</h2>
-                    <p>${producto.precio}</p>
+                    <p>Precio: $${producto.precio}</p>
             </div>   
-            <div class="col-sm-4" >
-              <p id="cantidad" class="aling-right">Cantidad ${producto.cantidad}</p>  
-                <div id="icodel" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
-            </div>`});
+            <div class=" col-sm-4" id="contpresu">  <br>
+              <p id="cantidad" class="col-sm-6">Cantidad:</p>             
+              <p class="col-sm-6">${producto.cantidad}</p>  
+            <br>  <div id="icodel" class="  col-sm-6" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>  
+            </div>
+            `});
 
+}
+//Ocultando lista de productos
+function ocultar() {
+    var x = document.getElementById("desaparecer");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+function calcularTotal()  {
+   let totalNeto = 0;
+   let iva= 0;
+   let total=  0;
+
+    productosSeleccionados.forEach((producto) => {   
+        totalNeto = (totalNeto + (producto.cantidad * producto.precio));
+        iva= (totalNeto*(0.19));
+        total=  (totalNeto + iva);     
+    })
+
+    $("#totalNeto").text(totalNeto);
+    $("#iva").text(iva);
+    $("#total").text(total);
+
+}
+
+  
+function decTk(token){ 
+  const base64Url = token.split(".")[1];
+  const base64 = base64Url.replace("-", "+").replace("_", "/");
+  var tk= JSON.parse(window.atob(base64));
+  tk = tk.data;
+  rut = tk.rut;
+}
+
+function presupuestoCrear(){
+ console.log("productosSeleccionados: ", productosSeleccionados)
+  axios.post(`/presupuestos`, 
+        {
+          rut:rut,
+          productos: productosSeleccionados,
+          precio_total: parseInt( $("#total").text() ),
+          observaciones_cliente: $("#observacion").val()
+        }
+        ).then((response) => {
+          console.log(response);            
+          alert("Presupuesto Enviado");
+          window.location.href = `/cliente/presupuesto`
+        }, (error) => {
+          console.log(error);
+          alert("Disculpe hubo un error en los Cambios")
+        });
+
+}
+
+function irListap(){ 
+ window.location.href = `/cliente/presupuesto/lista?rut=${rut}`
 }
 
 </script>

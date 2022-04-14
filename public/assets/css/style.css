@@ -1,110 +1,162 @@
 .navbar {
- background-color:  #6b277c;
- text-align: left;
-}
-
-
-body {
+  background-color:  #6b277c;
+  text-align: left;
+ }
+ 
+ 
+ body {
+     
+     text-shadow: 0px 0px 1px black;
+     font-family: sans-serif;
+     text-align: center;
+     
+     
+   }
+ 
+ h1{
+     font-family: Pacifico;
+     
+ }
+ 
+ #carouselExampleControls{
+   padding: 40px 100px;
+   font-family: sans-serif;
+   text-align: center;
+  
+ }
+ 
+ #destacados{
+   padding: 40px 100px;
+   font-family: sans-serif;
+   text-align: center;
+   font-size: 18px;
+ }
+ 
+ #quienes { 
+   font-family: sans-serif; 
+   font-size: 18px; 
+   padding: 40px 100px;
+   color: #ffffff; 
+   background:#6b277c; 
+   
+ }
+   
+ 
+ .bgazul{
+   background-color: rgb(80, 188, 207)!important;
+ }
+   
+ 
+ #imgTable{
+ 
+ width: 20px;
+ width: 100%;
+ align-self: center;
+ 
+ }
+ 
+ .imgTable{
+   height: 110px;
+   width: 40px;
+   width: 30%;
+   align-self: center;
+   
+   }
+   #modalPresu{
+     align-self: center;
+ 
+   }
+   #modalBody{
+     align-self: center;
+     background-color: #a53fbe;
+     text-decoration: #fafafa;
+   }
+ 
+ 
+   .imgModal{
+     height: 140px;
+     width: 40px;
+     width: 45%;
+     align-self: center;
     
-    text-shadow: 0px 0px 1px black;
-    font-family: sans-serif;
-    text-align: center;
+   }
+ #pp{
+   align-self: center;
+   text-align: center;
+   
+ }
+ 
+ 
+ #tabla{
+   float: center;
+ }
+ #tituloprod{
+   text-align: left;
+ }
+ 
+ 
+ #contac{
+   padding: 40px 100px;
+   background:#92cff3;
+ 
+ }
+ 
+ #footer {
+   background-color:  #6b277c; 
+   text-align: left;
+   align-self: left;
+ }
+ 
+ 
+     
+ 
+ 
+ #btnlista{
+   text-align: right;
+   padding: 40px 100px;
+ }
+ #containerpresu{
+   padding: 40px 100px;
+   text-align: center;
+   background-color: #6b277c;
+   height:186 ;
+   width: 206;
+ 
+ }
+ 
+ #cardProducto{
+   background-color: rgb(80, 188, 207)!important;
+   
+ }
+ 
+ 
+ #icodel{
+   align-self: right;
+   
+   
     
+ }
+ 
+ #btnenviar{
+   align-self: center;
+   align-items: center;
+   background-color: #6b277c!important;
+ }
+ 
+ #textlogo{
+   font-family:Pacifico;
+   font-size: xx-large; 
+ }
+ 
+ .textYoliDs{
+   font-family:Pacifico;
+ }
+ 
+ #totales{
+   float: right;
+ }
+  #contpresu{
+    border-bottom-style: solid;
     
   }
 
-h1{
-    font-family: Pacifico;
-}
-
-#carouselExampleControls{
-  padding: 40px 100px;
-  font-family: sans-serif;
-  text-align: center;
- 
-}
-
-#destacados{
-  padding: 40px 100px;
-  font-family: sans-serif;
-  text-align: center;
-  font-size: 18px;
-}
-
-#quienes { 
-  font-family: sans-serif; 
-  font-size: 18px; 
-  padding: 40px 100px;
-  color: #ffffff; 
-  background:#6b277c; 
-  
-}
-  
-
-.bgazul{
-  background-color: rgb(80, 188, 207)!important;
-}
-  
-
-#imgTable{
-height: 150px;
-width: 30px;
-width: 100%;
-}
-#tabla{
-  float: center;
-}
-#tituloprod{
-  text-align: left;
-
-}
-
-#contac{
-  padding: 40px 100px;
-  background:#92cff3;
-
-}
-
-#footer {
-  background-color:  #6b277c; 
-  text-align: left;
-  align-self: left;
-}
-
-
-    
-
-
-#btnlista{
-  text-align: right;
-  padding: 40px 100px;
-}
-#containerpresu{
-  padding: 40px 100px;
-  text-align: center;
-  background-color: rgb(80, 188, 207)!important;;
-}
-
-#icodel{
-  align-self: right;
-  float: right;
-}
-
-#btnenviar{
-  align-self: center;
-  align-items: center;
-  background-color: #6b277c!important;
-}
-
-#textlogo{
-  font-family:Pacifico;
-  font-size: xx-large; 
-}
-
-.textYoliDs{
-  font-family:Pacifico;
-}
-
-#totales{
-  float: right;
-}

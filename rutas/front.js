@@ -23,8 +23,18 @@ router.get('/', async (req, res) => {
 
 router.post('/mailing', async (req, res) => {   
     const { nombre, correo, asunto, contenido } = req.body;    
-    mail(nombre, correo.split(','), asunto, contenido)                
-      res.send("Envie correo")   
+    const contenido1 = `${nombre}, 
+                        <br>
+                        ${correo}, 
+                        <br>
+                        ${contenido}`;
+    mail.enviar(asunto, contenido1)                
+    res.send(` 
+    <script>
+    alert("Correo Enviado")
+    window.location.href = "/";
+    </script>
+`);  
 
 });
 
@@ -81,11 +91,13 @@ router.get('/cliente/login', async (req, res) => {
     });
 })
 router.get('/cliente/listapresupuesto', async (req, res) => {
+    const presupuestos = await db.presupuestos()
     res.render("index", {
-        layout: "listapresupuesto"
+        layout: "listapresupuesto",
+        presupuestos:presupuestos
     });
 })
-router.get('/cliente/editar', async (req, res) => {console.log("llegue a editar")
+router.get('/cliente/editar', async (req, res) => {
     res.render("index", {
         layout: "editar",
         id: req.params.id
@@ -94,7 +106,7 @@ router.get('/cliente/editar', async (req, res) => {console.log("llegue a editar"
 
 
 router.get('/cliente/presupuesto', async (req, res) => {
-    const productos = await db.productos()
+   const productos = await db.productos()
     res.render("index", {
         layout: "presupuesto",
         productos: productos
@@ -104,8 +116,12 @@ router.get('/cliente/presupuesto', async (req, res) => {
 
 
 router.get('/cliente/presupuesto/lista', async (req, res) => {
+    let { rut } = req.query; 
+    const presupuestos = await db.presupuestos(rut)
+    console.log(presupuestos)
     res.render("index", {
-        layout: "listapresupuesto"
+        layout: "listapresupuesto",
+        presupuestos:presupuestos
     });
 })
 
@@ -137,7 +153,7 @@ router.get('/SignIn', async (req, res) => {
 
     } else {
         res.send(`<script>  alert("Email o contraseña inválida.")      
-        window.location.href = "/cliente/login";        
+        window.location.href = "/login";        
         </script>`
         )};
 });
