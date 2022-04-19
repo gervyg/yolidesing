@@ -111,6 +111,30 @@ const presupuestos = async (rut) => {
 }
 
 
+const presupuestoFiltro = async (rut, fecha, estado) => {
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })
+
+    let where = (rut != "" || fecha != "" || estado != "")? "WHERE" : ""; 
+    let filtroRut = (rut != "")? "cp.rut_cliente='"+rut+"'" : ""; 
+    let filtroFecha = (fecha != "")? ((filtroRut != "")?" and p.fecha_de_emision='"+fecha+"'": " p.fecha_de_emision='"+fecha+"'") : ""; 
+    let filtroEstado= (estado != "")? ((filtroFecha != "" || filtroRut != "")?" and p.estado='"+estado+"'": "p.estado='"+estado+"'") : "" ;
+        
+    await client.connect();
+    const res = await client.query(`SELECT p.*, c.rut, c.nombre, c.email, c.telefono FROM presupuesto p INNER JOIN cliente_presupuesto cp ON p.id= cp.id_presupuesto LEFT JOIN cliente AS c ON c.rut=cp.rut_cliente ${where} ${filtroRut} ${filtroFecha} ${filtroEstado}`)
+    await client.end()
+    return res.rows
+}
+
+
+
+
+
+
 
 const presupuestoCrear = async (rut, productos, precio_total, observaciones_cliente) => {
     const client = new Client({
@@ -160,6 +184,40 @@ const presupuestosDetalle = async (id) => {
     return res.rows
 }
 
+const presupuestosAdm = async () => {
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })
+
+    await client.connect();    
+    const res = await client.query(`SELECT p.*,  c.rut, c.nombre, c.email, c.telefono from cliente_presupuesto AS cp INNER join presupuesto AS p ON cp.id_presupuesto=p.id LEFT JOIN cliente AS c ON c.rut=cp.rut_cliente;`)
+     
+    await client.end()
+    return res.rows
+}
+
+const adminEditar = async (id, fecha_probable_de_entrega, estado, observaciones_admin) => {
+    const client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })
+
+    await client.connect()
+    const res = {
+        text: `UPDATE presupuesto SET fecha_probable_de_entrega = $2, estado = $3, observaciones_admin = $4 WHERE id = $1`,
+        values: [id, fecha_probable_de_entrega, estado, observaciones_admin]
+    }
+    const result = await client.query(res);
+    await client.end()
+    return result;
+
+}
+
 
 
 
@@ -180,4 +238,5 @@ const productoCrear = async (articulo, precio, descripcion, foto, estado) => {
 
 
 
-module.exports = { getcliente, clienteInicio, clienteCrear, productos, clientEditar, presupuestoCrear, presupuestos, presupuestosDetalle }
+
+module.exports = { getcliente, clienteInicio, clienteCrear, productos, clientEditar, presupuestoCrear, presupuestos, presupuestosDetalle, presupuestosAdm, adminEditar, presupuestoFiltro }

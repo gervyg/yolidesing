@@ -24,7 +24,16 @@ router.put('/clientes/editar/:id', async (req, res) => {
     
     const {id, rut, nombre, password, direccion , telefono } = req.body;   
     const user = await db.clientEditar(id, rut, nombre, password, telefono, direccion )
-    res.send(user);    
+    res.send(user);   
+
+})
+
+//editando fecha de entrega desde administrar.
+router.put('/presupuestos/fechaE/:id', async (req, res) => {  console.log(req)      
+    const {id} = req.params;
+    const {fecha_probable_de_entrega, estado, observaciones_admin} = req.body;
+    const fecha = await db.adminEditar(id, fecha_probable_de_entrega, estado,observaciones_admin )
+    res.send(fecha);   
 
 })
 
@@ -34,6 +43,7 @@ router.get('/productos', async (req, res) => {
 })
 
 
+
 router.get('/presupuestos/detalles/:id', async (req, res) => { 
     const { id } = req.params;
     const presupuestosD = await db.presupuestosDetalle(id)
@@ -41,6 +51,23 @@ router.get('/presupuestos/detalles/:id', async (req, res) => {
 
 
 })
+
+router.get('/presupuestos/filtro', async (req, res) => {   
+    const {rut, fecha_de_emision, estado } = req.query;
+    const filtro = await db.presupuestoFiltro(rut, fecha_de_emision, estado)
+    res.send(filtro);   
+
+})
+
+
+
+router.get('/administrar/presupuestos', async (req, res) => {     
+    const presupuestosAdm = await db.presupuestosAdm()
+    res.send(presupuestosAdm);
+
+})
+
+
 router.post('/presupuestos', async (req, res) => {     
     const { rut, productos, precio_total, observaciones_cliente } = req.body;   
     const presupuesto = await db.presupuestoCrear(rut, productos, precio_total, observaciones_cliente )

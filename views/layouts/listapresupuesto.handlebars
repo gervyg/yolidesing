@@ -33,7 +33,7 @@
                   <th>{{this.id}}</th>                  
                   <td><span class="fHandle">{{this.fecha_de_emision}}</span></td>
                   <td><span class="fHandle">{{this.fecha_de_validez}}</span></td>
-                  <td><i onclick="detallesPresu('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{fecha_probable_de_entrega}}','{{ observaciones_admin}}', '{{precio_total}}')" class="fa-solid fa-magnifying-glass"></i></td>
+                  <td><i onclick="detallesPresu('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{this.fecha_probable_de_entrega}}','{{ this.observaciones_admin}}', '{{this.precio_total}}')" class="fa-solid fa-magnifying-glass"></i></td>
                   <td>{{ this.estado}}</td>
                                    
               </tr>
@@ -60,7 +60,7 @@
   <div class="modal-dialog dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">DETALLES DE PRESUPUESTO</h5>
+        <h5 class="modal-title">DETALLES DE PRESUPUESTO  #<span id="idup"></span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div id="modalBody" class="modal-body">
@@ -127,14 +127,16 @@
   });   
 
 function detallesPresu(id, fecha_de_emision, fecha_de_validez, estado, observaciones_cliente, fecha_probable_de_entrega, observaciones_admin, precio_total){
+    
+    console.log("ff", observaciones_admin);    
     $("#fechaEmision").text(new Date(fecha_de_emision).toLocaleDateString());
     $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString());
     $("#fechaEntrega").text(new Date(fecha_probable_de_entrega).toLocaleDateString());
     $("#observaciones").text(observaciones_cliente);
-    $("#observacionesYoli").text(observaciones_admin);
+    $("#observacionesyoli").text(observaciones_admin);
     $("#estado").text(estado);
     $("#total").text(precio_total);
-
+    $("#idup").text(id);
     
 
  

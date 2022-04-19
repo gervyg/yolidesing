@@ -7,11 +7,34 @@
     
 {{> encabezado sesion=true}}
 
-   
-<h1 class="text-alig-center py-5 px-5 my-5  ">LISTA DE PRESUPUESTOS </h1>
 
-<div id="containerpresu" class="container-fluid mx-0 row col-sm-12 aling-left">
-  <table id="tabla" class="table table-dark">
+
+<h1 class="text-alig-center py-5 px-5 my-5  ">Lista de Presupuestos </h1>
+<h4 class="py-3 text-center">FILTROS</h4>
+
+  <div class="col-sm-12 mx-2 py-4" id="filtrado">
+<label for="">Rut</label>
+ <input type="text" name="rutFiltro" id="rutFiltro">
+
+<label for="" class="mx-2">Fecha Emision</label>
+ <input type="date" name="fechaEmi" id="fechaEmi">
+
+ <label for=""class="mx-2">estado</label>
+ <select name="filtroEstado" id="filtroEstado">
+    <option value="">TODOS</option>
+    <option value="PENDIENTE">PENDIENTE</option>
+    <option value="ACEPTADO">ACEPTADO</option>
+    <option value="RECHAZADO">RECHAZADO</option>
+ </select>
+ <button id="btnenviar" onclick="filtrar()" class="text-white mx-2">Buscar</button>
+</div>
+
+
+
+
+
+<div id="containerpresu" class="container-fluid mx-0 row col-sm-12 aling-left py-3">
+  <table id="tabla" class="table table-ligt text-white">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -19,20 +42,22 @@
             <th scope="col">Rut</th>
             <th scope="col">Fecha de Solicitud</th>
             <th scope="col">Fecha de Validez</th>
+            <th scope="col">Fecha Probable Entrega</th>
             <th scope="col">Ver Detalle</th>            
             <th scope="col">Estado</th>
           </tr>
         </thead>
-        <tbody>
-         
-          {{#each user}}
+        <tbody id="tbodyPresu">
+          
+          {{#each presupuestosAdm}}
               <tr>
                   <th>{{this.id}}</th>  
                    <th>{{this.nombre}}</th>
                    <th>{{this.rut}}</th>               
-                  <td>{{this.fecha_de_solicitud}}</td>
-                  <td>{{this.fecha_de_validez}}</td>
-                  <td><i class="fa-solid fa-magnifying-glass"></i></td>
+                  <td><span class="fHandle">{{this.fecha_de_emision}}</span></td>
+                  <td><span class="fHandle">{{this.fecha_de_validez}} </span></td>       
+                  <td><span class="fHandle">{{this.fecha_probable_de_entrega}}</span></td>      
+                  <td><i onclick="detallesAdmin('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{this.fecha_probable_de_entrega}}','{{ this.observaciones_admin}}', '{{this.precio_total}}', '{{this.nombre}}', '{{this.rut}}', '{{this.email}}', '{{this.telefono}}')" class="fa-solid fa-magnifying-glass"></i></td>
                   <td>{{ this.estado}}</td>
                                    
               </tr>
@@ -48,10 +73,86 @@
 <div class="col-sm-6 mx-auto">
 
 
-<button type="button" class="btn btn-info mb-3 my-5">SALIR</button>
+<button type="button" id="btnenviar" class="btn btn-info mb-3 my-5">SALIR</button>
 </div>
 
 </section>
+
+
+<!--Modal-->
+<div class="modal fade" tabindex="-1" id="modalAdmin">
+  <div class="modal-dialog dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">DETALLES DE PRESUPUESTO #<span id="idPresuE"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="modalBody" class="modal-body">
+  
+  <div class=" col-sm-12 py-5 text-white " >
+  <p class="text-start">Nombre: <span id="nombre"></span></p>  
+  <p class="text-start">Rut: <span id="rut"></span></p>  
+  <p class="text-start" >Correo: <span id="correo"></span></p>
+  <p class="text-start">Teléfono: <span id="telefono"></span></p>
+</div> 
+
+<div id="detalles" class="row col-sm-12 py-5 text-white " >
+<p class="col-sm-6">Fecha de Emision: <span id="fechaEmision"></span></p>
+<p class="col-sm-6 text-start-end ">Fecha de Validez: <span id="fechaValidez"></span></p>
+
+</div>
+
+<div id="productosPresu" class="text-white py-3" style="text-items: center;"  >
+
+</div>
+
+<p class="col-sm-12 text-right text-white" style="text-align: right;" >Total: $ <span id="total" class="text-white" ></span></p>
+<p class="col-sm-12 text-white text-start" >Obsevaciones: <span id="observaciones"></span></p>
+
+
+
+
+
+<form id="editando">
+
+  <p class="col-sm-4 text-white">Fecha de Entrega: <span >
+    <input type="date" id="fechaEe" name="fechaEe" min="01-01-2022" max="31-12-2023"></span>
+  </p>
+
+  <p class="col-sm-12 text-white text-start"  >Estado:  </p>
+    <select class="form-select " id="estadoAdmin">
+      <option value="Seleccione" selected>Seleccione</option>
+      <option value="PENDIENTE">PENDIENTE</option>
+      <option value="ACEPTADO">ACEPTADO</option>
+      <option value="RECHAZADO">RECHAZADO</option>
+    </select>
+  <p class="col-sm-12 py-3 text-white" style="text-align: left;">Obsevaciones por Yolidesings: <span >
+    <textarea  id="observacionesyoli" name="observacionesyoli" class="form-control" cols="5" rows="3"></textarea>
+  </span></p>
+          
+  <i id="btnenviar" type="button" name="btnE" onclick="adminEditando()">Asignar</i>
+</form>
+
+
+
+
+
+
+      </div>
+      <div class="modal-footer text-white">
+        <button type="button" id="btnenviar" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
 
 {{>footer}}
  
@@ -69,3 +170,138 @@
 </body>
 
 </html>
+
+<script>
+
+//Dando formato a la fecha.
+  $(document).ready(function () {   
+    $('.fHandle').each(function(i, campo) {
+        campo.textContent = new Date(campo.textContent).toLocaleDateString();
+    }); 
+  });   
+
+
+
+ function adminEditando(){
+   let id = parseInt( $("#idPresuE").text() );
+   let fechaEntregap = $("#fechaEe").val();
+   let estadoA = $("#estadoAdmin").val();
+   let observaciones = $("#observacionesyoli").val();
+            
+ axios.put(`/presupuestos/fechaE/${id}`,
+      {
+        fecha_probable_de_entrega: fechaEntregap,
+        estado: estadoA,
+        observaciones_admin: observaciones
+      })
+      .then((response) => { 
+          console.log(response);   
+           alert("Cambios Realizados");
+                  
+          let div = document.getElementById("editando");
+          div.innerHTML = ""; 
+          response=response.data;
+
+      })
+        };
+
+        function filtrar(){
+   let rut =  $("#rutFiltro").val();
+   let fechaEmision = $("#fechaEmi").val();
+   let estado = $("#filtroEstado").val();
+   
+ axios.get(`/presupuestos/filtro`,
+      { params: {
+          rut: rut,
+          fecha_de_emision: fechaEmision,
+          estado: estado       
+        }
+      })
+      .then((response) => { 
+          console.log(response);   
+           alert("Filtrado");
+                  
+          let div = document.getElementById("tbodyPresu");
+          div.innerHTML = ""; 
+          response=response.data;
+          for(i=0; i<response.length; i++) { 
+
+          div.innerHTML +=`<tr>
+                  <th>${response[i].id}</th>  
+                   <th>${response[i].nombre}</th>
+                   <th>${response[i].rut}</th>               
+                  <td><span class="fHandle">${response[i].fecha_de_emision}</span></td>
+                  <td><span class="fHandle">${response[i].fecha_de_validez} </span></td>       
+                  <td><span class="fHandle">${response[i].fecha_probable_de_entrega}</span></td>      
+                  <td><i onclick="detallesAdmin('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{this.fecha_probable_de_entrega}}','{{ this.observaciones_admin}}', '{{this.precio_total}}', '{{this.nombre}}', '{{this.rut}}', '{{this.email}}', '{{this.telefono}}')" class="fa-solid fa-magnifying-glass"></i></td>
+                  <td>${response[i].estado}</td>
+                                   
+              </tr>`;
+                  
+      }
+        }, (error) => {
+          console.log(error);
+          alert("Disculpe hubo un error")
+        }); 
+};
+
+
+
+
+
+function detallesAdmin(id, fecha_de_emision, fecha_de_validez, estado, observaciones_cliente, fecha_probable_de_entrega, observaciones_admin, precio_total, nombre, rut, email, telefono){
+    $("#idPresuE").text(id);
+    $("#nombre").text(nombre);
+    $("#rut").text(rut);
+    $("#correo").text(email);
+    $("#telefono").text(telefono);    
+    $("#fechaEmision").text(new Date(fecha_de_emision).toLocaleDateString());
+    $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString());
+    $("#fechaEe").val(new Date(fecha_probable_de_entrega).toLocaleDateString());
+    $("#observaciones").text(observaciones_cliente);
+    $("#observacionesyoli").val(observaciones_admin);
+    $("#estado").text(estado);
+    $("#total").text(precio_total);
+
+    $("#estadoAdmin").val(estado);
+console.log("fechae",fecha_probable_de_entrega)
+ 
+  axios.get(`/presupuestos/detalles/${id}`)
+      .then((response) => {
+
+          console.log(response);            
+          let div = document.getElementById("productosPresu");
+          div.innerHTML = ""; 
+          response=response.data;
+for(i=0; i<response.length; i++) { 
+
+          div.innerHTML +=`<div class="col-sm-12"  >  
+                <img  class=" imgModal aling-center"  src="/static/assets/img/${response[i].foto}"  alt="">
+              </div> 
+              <div class="col-sm-12 "   >
+                      <h2>${response[i].articulo}</h2>
+                      <p>Precio: $${response[i].precio}</p>
+              </div>   
+              <div class="col-sm-12" 
+                <p id="cantidad" class="col-sm-6">Cantidad: <span>${response[i].cantidad}</span> </p>          
+                  
+                  
+              </div>`;
+
+              
+};
+
+
+$("#modalAdmin").modal("show");
+
+        }, (error) => {
+          console.log(error);
+          alert("Disculpe hubo un error")
+        });
+          
+
+}
+
+
+
+</script>

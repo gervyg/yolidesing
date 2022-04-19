@@ -29,8 +29,8 @@
                       Bienvenido
                       </a>
                 <div class="dropdown-menu" style="margin-left: -70px;">
-                  <a class="dropdown-item" href="./editar">Actualizar Datos</a>
-                  <a class="dropdown-item" href="./listapresupuesto">Lista de Presupuestos</a>
+                  <a class="dropdown-item" onclick="irEditar()">Actualizar Datos</a>
+                  <a class="dropdown-item" onclick="irListap()">Lista de Presupuestos</a>
                   <a class="dropdown-item" href="./main">Salir</a>  
                 </div>
              </li>         
@@ -39,3 +39,16 @@
           </div>
         </div>
       </nav>
+
+
+      <script>
+        function irListap(){ 
+ window.location.href = `/cliente/presupuesto/lista?rut=${rut}`
+}
+
+      function irEditar(){ 
+ window.location.href = `/cliente/editar`
+}
+
+
+      </script>

@@ -64,11 +64,10 @@ const Verificar = (req, res, next) => {
 };
 
 router.get('/administrar', Verificar, async (req, res) => {
-    const user = await db.getcliente()
-
+    const presupuestosAdm = await db.presupuestosAdm()
     res.render("index", {
         layout: "administrar",
-        user: user
+        presupuestosAdm:presupuestosAdm
     });
 
 })
@@ -130,7 +129,7 @@ router.get('/SignIn', async (req, res) => {
     const user = await db.clienteInicio(email, password)
 
     if (user.length != 0) {
-        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 120, data: user[0], },
+        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 240, data: user[0], },
             secretKey
 
         );
