@@ -11,7 +11,6 @@ const fs = require('fs');
 const front = require('./rutas/front')
 const api = require('./rutas/api')
 const { Pool } = require("pg");
-const enviar = require('../yolidesing/mailer')
 
 app.use(expressFileUpload({
     limits: { fileSize: 5000000 },
