@@ -29,7 +29,7 @@ router.put('/clientes/editar/:id', async (req, res) => {
 })
 
 //editando fecha de entrega desde administrar.
-router.put('/presupuestos/fechaE/:id', async (req, res) => {  console.log(req)      
+router.put('/presupuestos/fechaE/:id', async (req, res) => {       
     const {id} = req.params;
     const {fecha_probable_de_entrega, estado, observaciones_admin} = req.body;
     const fecha = await db.adminEditar(id, fecha_probable_de_entrega, estado,observaciones_admin )
@@ -55,8 +55,7 @@ router.get('/presupuestos/detalles/:id', async (req, res) => {
 router.get('/presupuestos/filtro', async (req, res) => {   
     const {rut, fecha_de_emision, estado } = req.query;
     const filtro = await db.presupuestoFiltro(rut, fecha_de_emision, estado)
-    res.send(filtro);   
-
+    res.send(filtro);  
 })
 
 

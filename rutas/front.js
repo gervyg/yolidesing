@@ -50,10 +50,17 @@ const Verificar = (req, res, next) => {
     let { token } = req.query;
     jwt.verify(token, secretKey, (err, decoded) => {
         if (err) {
-            res.status(401).send({
+            res.send(` 
+                <script>
+                localStorage.setItem('token', '')
+                alert("Sesión Expirada");
+                window.location.href = "/";
+                </script>
+            `);
+            /*res.status(401).send({
                 error: "401 No Autorizado",
                 message: err.message,
-            })
+            })*/
         } else {
             req.user = decoded;
             next();
@@ -104,7 +111,7 @@ router.get('/cliente/editar', async (req, res) => {
 })
 
 
-router.get('/cliente/presupuesto', async (req, res) => {
+router.get('/cliente/presupuesto', Verificar, async (req, res) => {
    const productos = await db.productos()
     res.render("index", {
         layout: "presupuesto",
