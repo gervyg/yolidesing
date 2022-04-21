@@ -5,7 +5,7 @@
 
 <body>
     
-{{> encabezado sesion=true}}
+{{> encabezado admin=true}}
 
 
 
@@ -272,7 +272,7 @@ function detallesAdmin(id, fecha_de_emision, fecha_de_validez, estado, observaci
     if(fecha_probable_de_entrega == null || fecha_probable_de_entrega == ""){
       $("#fechaEe").val("");
     }else{
-      $("#fechaEe").val(new Date (fecha_probable_de_entrega).toISOString().split('T')[0]);      
+      $("#fechaEe").val(new Date (fecha_probable_de_entrega).toUTCString().split('T')[0]);      
     }    
     $("#observaciones").text(observaciones_cliente);
     $("#observacionesyoli").val(observaciones_admin);

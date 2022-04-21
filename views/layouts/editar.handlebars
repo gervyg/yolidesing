@@ -4,9 +4,9 @@
 {{> head}}
 
 <body>
-
   {{> encabezado sesion=true}}
 
+  
 <hr>
 
 
@@ -69,12 +69,13 @@
 
 <script>
 $(document).ready(function () {        
-    var id = 0;
+    var id = 0; 
+    var rut;
     const token= JSON.parse(localStorage.getItem('token'));  
     decTk(token)   
   }); 
 
-  function validar() {
+  function validar() { 
     let password = $("#password").val();
     let repitaPassword = $("#repita_password").val();
       if (password != repitaPassword) {
@@ -84,12 +85,13 @@ $(document).ready(function () {
       return true;
   }
 
-  function decTk(token){ 
+  function decTk(token){   
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace("-", "+").replace("_", "/");
     let tk= JSON.parse(window.atob(base64));
     tk = tk.data; 
     id = tk.id;     
+    rut = tk.rut; 
 
     $("#rut").val(tk.rut);
     $("#nombre").val(tk.nombre);

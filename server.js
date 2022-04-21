@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(front)
 app.use(api)
 
+//app.get("/tz", (req, res) => res.send(process.env.TZ))
 
 const port = process.env.PORT || 5000
 

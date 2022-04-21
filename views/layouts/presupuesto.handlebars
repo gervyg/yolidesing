@@ -123,7 +123,7 @@
 
   $(document).ready(function () {   
     var rut;     
-    const token= JSON.parse(localStorage.getItem('token'));  
+    var token= JSON.parse(localStorage.getItem('token'));  
     decTk(token);   
   });   
 
@@ -239,7 +239,7 @@ function presupuestoCrear(){
           window.location.href = `/cliente/presupuesto`
         }, (error) => {
           console.log(error);
-          alert("Disculpe hubo un error en los Cambios")
+          alert("Disculpe hubo un error ")
         });
 
 }
