@@ -13,7 +13,7 @@
 <section>
   <div class="row col-sm-12">
     
-<div  id="btnlista"class="col-sm-12 mx-5 py-5">
+<div  id="btnlista"class="col-sm-12 mx-2 py-2">
    <button id="btnenviar" class="butoon-primary text aling-left text-white " onclick="ocultar()">LISTA DE PRODUCTOS</button>
    <button id="btnenviar">
    <a  class="butoon-primary text aling-left text-white"  onclick="irListap()"> <i class="fa-solid fa-magnifying-glass"></i>LISTA DE PRESUPUESTOS</a>
@@ -54,13 +54,15 @@
 </div>
 
 <section >
-  <div class="container-fluid mx-5 my-5 float-start">
+  <div class="container-fluid my-5 float-start">
 <h1 >Productos Seleccionados</h1>
 </div>
 </section>
 
 
-<div id="containerpresu" class="container-fluid g-3 mx-0 row col-sm-12 text-white"></div>
+<div id="containerpresu" class="container-fluid g-3 mx-0 row col-sm-12 text-white"> 
+  <p class='text-center'>No hay productos selccionados</p>
+</div>
 
 
 <section  class="col-sm-12 alig-center mx-5 py-5">
@@ -86,7 +88,7 @@
 <div class="col-sm-6 mx-auto">
 
 <button id="btnenviar" type="submit" onclick="presupuestoCrear()" class="btn btn-info mb-3 my-5 text-white">ACEPTAR</button>
-<button id="btnenviar" type="button" class="btn btn-info mb-3 my-5 text-white">CANCELAR</button>
+<button id="cerrar" type="button" class="btn btn-info mb-3 my-5 text-white" onclick="limpiar()">CANCELAR</button>
 </div>
 
 </section>
@@ -148,21 +150,24 @@ const agregarProducto = (id, foto, articulo, precio) =>{
   
   let div = document.getElementById("containerpresu");
   div.innerHTML = ""; 
-  productosSeleccionados.forEach((producto, indice) => {
+
+  
+    productosSeleccionados.forEach((producto, indice) => {
         div.innerHTML +=`<div class="col-sm-4" id="contpresu" >  
-              <img  class="imgTable" src="/static/assets/img/${producto.foto}"  alt="">
+              <img  class="imgTable mb-2" src="/static/assets/img/${producto.foto}"  alt="">
             </div> 
-            <div class="col-sm-4" id="contpresu" >
+            <div class="col-sm-5 text-start" id="contpresu" >
                     <h2>${producto.articulo}</h2>
                     <p>Precio: $${producto.precio}</p>
             </div>   
-            <div class="col-sm-4" id="contpresu">    <br>
-              <p id="cantidad" class="col-sm-6">Cantidad:</p>             
-              <p class="col-sm-6">${producto.cantidad}</p> 
-             <br><div id="icodel" class="col-sm-6" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
+            <div class="col-sm-3 mt-4" id="contpresu">    
+              <div class="col-sm-6 float-start"><p id="cantidad" class="col-sm-6">Cantidad:</p>             
+              <p class="col-sm-6">${producto.cantidad}</p> </div>
+             <div id="icodel" class="col-sm-6 mt-4 float-start" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>
             </div> 
             `});
-  
+
+   
   calcularTotal();
 }; 
 
@@ -172,21 +177,26 @@ const eliminarProducto = (id) =>{
   productosSeleccionados.splice( busqueda[0], 1);
   let div = document.getElementById("containerpresu");
   div.innerHTML = ""; 
-  productosSeleccionados.forEach((producto, indice) => {
-        div.innerHTML +=`<div class=" col-sm-4" id="contpresu" >  
-              <img  class="imgTable" src="/static/assets/img/${producto.foto}"  alt="">
-            </div> 
-            <div class="col-sm-4" id="contpresu" >
-                    <h2>${producto.articulo}</h2>
-                    <p>Precio: $${producto.precio}</p>
-            </div>   
-            <div class=" col-sm-4" id="contpresu">  <br>
-              <p id="cantidad" class="col-sm-6">Cantidad:</p>             
-              <p class="col-sm-6">${producto.cantidad}</p>  
-            <br>  <div id="icodel" class="  col-sm-6" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>  
-            </div>
-            `});
 
+  if(productosSeleccionados.length == 0){
+    div.innerHTML = "<p class='text-center'>No hay productos selccionados</p>"
+  }else{
+    productosSeleccionados.forEach((producto, indice) => {
+          div.innerHTML +=`<div class=" col-sm-4" id="contpresu" >  
+                <img  class="imgTable mb-2" src="/static/assets/img/${producto.foto}"  alt="">
+              </div> 
+              <div class="col-sm-5 text-start" id="contpresu" >
+                      <h2>${producto.articulo}</h2>
+                      <p>Precio: $${producto.precio}</p>
+              </div>   
+              <div class="col-sm-3 mt-4" id="contpresu">  
+                <div class="col-sm-6 float-start"><p id="cantidad" class="col-sm-6">Cantidad:</p>             
+                <p class="col-sm-6">${producto.cantidad}</p></div>  
+                <div id="icodel" class="col-sm-6 mt-4 float-start" onclick ="eliminarProducto('${producto.id}')"><i class="fa-solid fa-trash-can"></i></div>  
+              </div>
+              `});
+  }
+  calcularTotal();
 }
 //Ocultando lista de productos
 function ocultar() {
@@ -226,6 +236,7 @@ function decTk(token){
 
 function presupuestoCrear(){
  console.log("productosSeleccionados: ", productosSeleccionados)
+ if ( productosSeleccionados.length > 0){
   axios.post(`/presupuestos`, 
         {
           rut:rut,
@@ -241,11 +252,29 @@ function presupuestoCrear(){
           console.log(error);
           alert("Disculpe hubo un error ")
         });
-
+}else{
+  alert("No hay productos Seleccionados ")
+}
 }
 
 function irListap(){ 
  window.location.href = `/cliente/presupuesto/lista?rut=${rut}`
 }
+
+//limpiar campos de presupuesto al click cancelar.
+function limpiar(){
+
+ const productosSeleccionados =  []; 
+let div = document.getElementById("containerpresu");
+  div.innerHTML = "<p class='text-center'>No hay productos selccionados</p>"
+   
+
+    $("#totalNeto").text(0);
+    $("#iva").text(0);
+    $("#total").text(0);
+    $("#observacion").val("")
+}
+
+
 
 </script>

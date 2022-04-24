@@ -6,14 +6,14 @@
 <body>
   {{> encabezado sesion=true}}
 
-  
+
 <hr>
 
 
 
     <div class="py-4 ">
       <h1 class="text-center mx-5 my-5 py-5" >Actualiza tus Datos</h1>
-      <hr class="w-50" style="margin: 2rem 335px;">
+      <hr class="w-50" style="margin: 2rem auto;">
       <form id="formEdit" class="text-center">
         <div class="form-group row w-50 m-auto aling-center">
           <div class="form-group col-12 col-sm-6">
@@ -22,7 +22,7 @@
           </div>
           <div class="form-group col-12 col-sm-6">
             <label>Rut</label>
-            <input  id="rut"  name="rut" class="form-control m-auto" />
+            <input  id="rut"  name="rut" class="form-control m-auto" disabled/>
           </div>
           <div class="form-group col-12 col-sm-6">
             <label>Nombre</label>
@@ -123,7 +123,7 @@ $(document).ready(function () {
         }
         ).then((response) => {
           console.log(response);            
-          alert("Cambios Guardados")
+          alert("Cambios Guardados")          
         }, (error) => {
           console.log(error);
           alert("Disculpe hubo un error en los Cambios")

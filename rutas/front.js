@@ -57,10 +57,7 @@ const Verificar = (req, res, next) => {
                 window.location.href = "/";
                 </script>
             `);
-            /*res.status(401).send({
-                error: "401 No Autorizado",
-                message: err.message,
-            })*/
+            
         } else {
             req.user = decoded;
             next();
@@ -79,7 +76,7 @@ router.get('/administrar', Verificar, async (req, res) => {
 
 })
 
-router.get('/cliente', async (req, res) => {
+router.get('/cliente',  async (req, res) => {
     res.render("index", {
         layout: "registro"
     });
@@ -103,7 +100,7 @@ router.get('/cliente/listapresupuesto', async (req, res) => {
         presupuestos:presupuestos
     });
 })
-router.get('/cliente/editar', async (req, res) => {
+router.get('/cliente/editar',  async (req, res) => {
     res.render("index", {
         layout: "editar",
         id: req.params.id
@@ -121,7 +118,7 @@ router.get('/cliente/presupuesto', Verificar, async (req, res) => {
 
 
 
-router.get('/cliente/presupuesto/lista', async (req, res) => {
+router.get('/cliente/presupuesto/lista',  async (req, res) => {
     let { rut } = req.query; 
     const presupuestos = await db.presupuestos(rut)
     console.log(presupuestos)

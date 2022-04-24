@@ -25,10 +25,10 @@
               {{/if}}  
               {{#if sesion includeZero=true}}
               <li class="nav-item dropdown">              
-                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 50px;">
                       Bienvenido
                       </a>
-                <div class="dropdown-menu" style="margin-left: -70px;">
+                <div class="dropdown-menu" >
                   <a class="dropdown-item" onclick="irEditar()">Actualizar Datos</a>
                   <a class="dropdown-item" onclick="irListap()">Lista de Presupuestos</a>
                   <a class="dropdown-item" onclick="irSolicitudP()">Solicitud Presupuesto</a>
@@ -70,7 +70,23 @@ $(document).ready(function () {
     rutTk = tk.rut; 
     tkn = token;
   }
+//Verificando Expiracion de Token.
+function verificarSesion () {
+  const token= JSON.parse(localStorage.getItem('token')); 
+const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace("-", "+").replace("_", "/");
+    let tkSesion= JSON.parse(window.atob(base64));
 
+if (Date.now() >= (tkSesion.exp) * 1000) {
+  alert("Sesión Expirada")
+  salir();
+}
+
+}
+
+  setInterval(function(){ 
+    verificarSesion()
+  }, 60000);
 
 
 

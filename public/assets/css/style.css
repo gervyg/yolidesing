@@ -9,7 +9,7 @@
      text-shadow: 0px 0px 1px black;
      font-family: sans-serif;
      text-align: center;
-     
+     align-self:auto ;
      
    }
  
@@ -30,6 +30,8 @@
    font-family: sans-serif;
    text-align: center;
    font-size: 18px;
+   
+     flex-wrap: wrap;
  }
  
  #quienes { 
@@ -67,16 +69,16 @@
  
    }
    #modalBody{
-     align-self: center;
+     /*align-self: center;*/
      background-color: #a53fbe;
      text-decoration: #fafafa;
    }
  
  
    .imgModal{
-     height: 140px;
-     width: 40px;
-     width: 45%;
+     height: 120px;
+     width: 100px;
+     width: 60%;
      align-self: center;
     
    }
@@ -126,7 +128,7 @@
  
  #cardProducto{
    background-color: rgb(80, 188, 207)!important;
-   
+  
  }
  
  
@@ -160,3 +162,7 @@
     
   }
 
+  #cerrar{
+    background-color: rgb(96, 97, 97);
+    align-items: center;
+  }

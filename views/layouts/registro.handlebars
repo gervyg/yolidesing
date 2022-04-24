@@ -11,7 +11,7 @@
 
     <div class="py-4 ">
       <h1 class="text-center py-5 my-5" >Registro de Cliente</h1>
-      <hr class="w-50" style="margin: 2rem 335px;">
+      <hr class="w-50" style="margin: 2rem auto;">
       <form id="formCreate" enctype="multipart/form-data" class="text-center">
         <div class="form-group row w-50 m-auto aling-center">
           <div class="form-group col-12 col-sm-6">
@@ -76,7 +76,7 @@
       formData.append("direccion", direccion);
       formData.append("telefono", telefono);
 
-      if(validate()){      
+      if(validaPass()){      
        
         axios.post(`/clientes`, formData
           ).then((response) => {
@@ -91,7 +91,7 @@
 
     });
 
-    function validate() {
+    function validaPass() {
         let password = $("#password").val();
       let repitaPassword = $("#repita_password").val();
         if (password != repitaPassword) {
