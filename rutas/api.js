@@ -66,7 +66,7 @@ router.get('/administrar/presupuestos', async (req, res) => {
 
 })
 
-
+//crear presupuesto y envio de correo con datos del presupuesto. 
 router.post('/presupuestos', async (req, res) => {     
     const { rut, productos, precio_total, observaciones_cliente } = req.body;   
     const presupuesto = await db.presupuestoCrear(rut, productos, precio_total, observaciones_cliente )

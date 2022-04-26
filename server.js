@@ -23,13 +23,13 @@ app.use(bodyParser.json());
 app.use(front)
 app.use(api)
 
-//app.get("/tz", (req, res) => res.send(process.env.TZ))
+
 
 const port = process.env.PORT || 5000
 
 app.use('/static', express.static('public'))
 
-//app.engine('handlebars', handlebars());
+
 app.engine(
     'handlebars',
     exphbs.engine({
@@ -41,10 +41,7 @@ app.engine(
 
 app.set('view engine', 'handlebars');
 
-
-    
-
-        
+           
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

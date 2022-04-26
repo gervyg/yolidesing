@@ -6,6 +6,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+             <!--Condicionando botones del navbar segun la vista-->
               {{#if inicio includeZero=true}}
               <li class="nav-item">
                 <a class="nav-link active  text-white" aria-current="page" href="#inicio">INICIO</a>
@@ -54,7 +55,7 @@
 
       <script>
 
-
+//Extrayendo del token datos y tiempo de expiracion. 
 $(document).ready(function () {        
     var rutTk;
     var tkn;
@@ -81,7 +82,6 @@ if (Date.now() >= (tkSesion.exp) * 1000) {
   alert("Sesión Expirada")
   salir();
 }
-
 }
 
   setInterval(function(){ 

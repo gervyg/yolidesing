@@ -4,136 +4,141 @@
 {{> head}}
 
 <body>
-    
-{{> encabezado admin=true}}
+
+  {{> encabezado admin=true}}
 
 
 
-<h1 class="text-alig-center pt-5 mx-5 my-5  ">Lista de Presupuestos </h1>
-<h4 class="py-3 text-center">FILTROS</h4>
+  <h1 class="text-alig-center pt-5 mx-5 my-5  ">Lista de Presupuestos </h1>
+  <h4 class="py-3 text-center">FILTROS</h4>
 
   <div class="col-sm-12 mx-2 py-4" id="filtrado">
-<label for="">Rut</label>
- <input type="text" name="rutFiltro" id="rutFiltro">
+    <label for="">Rut</label>
+    <input type="text" name="rutFiltro" id="rutFiltro">
 
-<label for="" class="mx-2">Fecha Emision</label>
- <input type="date" name="fechaEmi" id="fechaEmi">
+    <label for="" class="mx-2">Fecha Emision</label>
+    <input type="date" name="fechaEmi" id="fechaEmi">
 
- <label for=""class="mx-2">estado</label>
- <select name="filtroEstado" id="filtroEstado">
-    <option value="">TODOS</option>
-    <option value="PENDIENTE">PENDIENTE</option>
-    <option value="ACEPTADO">ACEPTADO</option>
-    <option value="RECHAZADO">RECHAZADO</option>
- </select>
- <button id="btnenviar" onclick="filtrar()" class="text-white mx-2">Buscar</button>
-</div>
-
-
-
-
-
-<div id="containerpresu" class="container-fluid mb-5 row col-sm-12 aling-left py-3">
-  <table id="tabla" class="table table-ligt text-white">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Rut</th>
-            <th scope="col">Fecha de Solicitud</th>
-            <th scope="col">Fecha de Validez</th>
-            <th scope="col">Fecha Probable Entrega</th>
-            <th scope="col">Ver Detalle</th>            
-            <th scope="col">Estado</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyPresu">
-          
-          {{#each presupuestosAdm}}
-              <tr>
-                  <th>{{this.id}}</th>  
-                   <th>{{this.nombre}}</th>
-                   <th>{{this.rut}}</th>               
-                  <td><span class="fHandle">{{this.fecha_de_emision}}</span></td>
-                  <td><span class="fHandle">{{this.fecha_de_validez}} </span></td>       
-                  <td><span class="fHandle">{{this.fecha_probable_de_entrega}}</span></td>      
-                  <td><i onclick="detallesAdmin('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{this.fecha_probable_de_entrega}}','{{ this.observaciones_admin}}', '{{this.precio_total}}', '{{this.nombre}}', '{{this.rut}}', '{{this.email}}', '{{this.telefono}}')" class="fa-solid fa-magnifying-glass" type="button" ></i></td>
-                  <td>{{ this.estado}}</td>
-                                   
-              </tr>
-          {{/each}}
-        </tbody>
-      </table>
-
-  
-</div>
-
-
-
-
-
-<!--Modal-->
-<div class="modal fade" tabindex="-1" id="modalAdmin">
-  <div class="modal-dialog dialog-centered modal-md" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">DETALLES DE PRESUPUESTO #<span id="idPresuE"></span></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-  
-  <div class=" col-sm-12 pt-0 mx-4 py-1" style="margin: 0;" >
-  <p class="text-start py-0">Nombre: <span id="nombre"></span></p>  
-  <p class="text-start py-0">Rut: <span id="rut"></span></p>  
-  <p class="text-start py-0" >Correo: <span id="correo"></span></p>
-  <p class="text-start py-0">Teléfono: <span id="telefono"></span></p>
-</div> 
-<div id="modalBody" class="modal-body">
-
-<div id="detalles" class="row col-sm-12 py-2 text-white " >
-<p class="col-sm-6">Fecha de Emision: <span id="fechaEmision"></span></p>
-<p class="col-sm-6 text-start-end ">Fecha de Validez: <span id="fechaValidez"></span></p>
-</div>
-
-<h3 class="text-center text-white" style=" border-bottom: solid;">PRODUCTOS</h3>
-<div id="productosPresu" class="text-white py-3 " >
-
-
-<div id="productosPresu" class="text-white " style="text-items: center;"  ></div>
-
-<p class="col-sm-12 text-right text-white" style="text-align: right;" >Total: $ <span id="total" class="text-white" ></span></p>
-</div>
-<p class="col-sm-12 text-white text-start" >Obsevaciones Cliente: <span id="observaciones"></span></p>
-<p style=" border-bottom: solid;" class="text-white"></p>
-
-<form id="editando">
-  <p class="col-sm-4  text-white">Fecha de Entrega: <span >
-    <input type="date" id="fechaEe" name="fechaEe" min="01-01-2022" max="31-12-2023"></span>
-  </p>
-  <p class="col-sm-12 text-white text-start"  >Estado:  </p>
-    <select class="form-select " id="estadoAdmin">
-      <option value="Seleccione" selected>Seleccione</option>
+    <label for="" class="mx-2">estado</label>
+    <select name="filtroEstado" id="filtroEstado">
+      <option value="">TODOS</option>
       <option value="PENDIENTE">PENDIENTE</option>
       <option value="ACEPTADO">ACEPTADO</option>
       <option value="RECHAZADO">RECHAZADO</option>
     </select>
-  <p class="col-sm-12 py-3 text-white" style="text-align: left;">Obsevaciones por Yolidesings: <span >
-    <textarea  id="observacionesyoli" name="observacionesyoli" class="form-control" cols="5" rows="3"></textarea>
-  </span></p>
-    </div>      
-  
-</form>
-
-
-      
-      <div class="modal-footer text-white" style="align-self: center;">
-        <i id="btnenviar" type="button" name="btnE" onclick="adminEditando()" class=" btn btn-secondary text-white">Guardar</i>
-        <button type="button" id="cerrar" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: rgb(96, 97, 97);">Cerrar</button>
-        
-      </div>
-    
+    <button id="btnenviar" onclick="filtrar()" class="text-white mx-2">Buscar</button>
   </div>
-</div>
+
+
+
+  <!--tabla Presupuesto.-->
+
+  <div id="containerpresu" class="container-fluid mb-5 row col-sm-12 aling-left py-3">
+    <table id="tabla" class="table table-ligt text-white">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Rut</th>
+          <th scope="col">Fecha de Solicitud</th>
+          <th scope="col">Fecha de Validez</th>
+          <th scope="col">Fecha Probable Entrega</th>
+          <th scope="col">Ver Detalle</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyPresu">
+
+        {{#each presupuestosAdm}}
+        <tr>
+          <th>{{this.id}}</th>
+          <th>{{this.nombre}}</th>
+          <th>{{this.rut}}</th>
+          <td><span class="fHandle">{{this.fecha_de_emision}}</span></td>
+          <td><span class="fHandle">{{this.fecha_de_validez}} </span></td>
+          <td><span class="fHandle">{{this.fecha_probable_de_entrega}}</span></td>
+          <td><i
+              onclick="detallesAdmin('{{this.id}}','{{this.fecha_de_emision}}', '{{this.fecha_de_validez}}', '{{this.estado}}', '{{this.observaciones_cliente}}', '{{this.fecha_probable_de_entrega}}','{{ this.observaciones_admin}}', '{{this.precio_total}}', '{{this.nombre}}', '{{this.rut}}', '{{this.email}}', '{{this.telefono}}')"
+              class="fa-solid fa-magnifying-glass" type="button"></i></td>
+          <td>{{ this.estado}}</td>
+
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+
+
+
+  <!--Modal-->
+  <div class="modal fade" tabindex="-1" id="modalAdmin">
+    <div class="modal-dialog dialog-centered modal-md" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">DETALLES DE PRESUPUESTO #<span id="idPresuE"></span></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+
+        <div class=" col-sm-12 pt-0 mx-4 py-1" style="margin: 0;">
+          <p class="text-start py-0">Nombre: <span id="nombre"></span></p>
+          <p class="text-start py-0">Rut: <span id="rut"></span></p>
+          <p class="text-start py-0">Correo: <span id="correo"></span></p>
+          <p class="text-start py-0">Teléfono: <span id="telefono"></span></p>
+        </div>
+        <div id="modalBody" class="modal-body">
+
+          <div id="detalles" class="row col-sm-12 py-2 text-white ">
+            <p class="col-sm-6">Fecha de Emision: <span id="fechaEmision"></span></p>
+            <p class="col-sm-6 text-start-end ">Fecha de Validez: <span id="fechaValidez"></span></p>
+          </div>
+
+          <h3 class="text-center text-white" style=" border-bottom: solid;">PRODUCTOS</h3>
+          <div id="productosPresu" class="text-white py-3 ">
+
+
+            <div id="productosPresu" class="text-white " style="text-items: center;"></div>
+
+            <p class="col-sm-12 text-right text-white" style="text-align: right;">Total: $ <span id="total"
+                class="text-white"></span></p>
+          </div>
+          <p class="col-sm-12 text-white text-start">Obsevaciones Cliente: <span id="observaciones"></span></p>
+          <p style=" border-bottom: solid;" class="text-white"></p>
+
+          <form id="editando">
+            <p class="col-sm-4  text-white">Fecha de Entrega: <span>
+                <input type="date" id="fechaEe" name="fechaEe" min="01-01-2022" max="31-12-2023"></span>
+            </p>
+            <p class="col-sm-12 text-white text-start">Estado: </p>
+            <select class="form-select " id="estadoAdmin">
+              <option value="Seleccione" selected>Seleccione</option>
+              <option value="PENDIENTE">PENDIENTE</option>
+              <option value="ACEPTADO">ACEPTADO</option>
+              <option value="RECHAZADO">RECHAZADO</option>
+            </select>
+            <p class="col-sm-12 py-3 text-white" style="text-align: left;">Obsevaciones por Yolidesings: <span>
+                <textarea id="observacionesyoli" name="observacionesyoli" class="form-control" cols="5"
+                  rows="3"></textarea>
+              </span></p>
+        </div>
+
+        </form>
+
+
+        <div class="modal-footer text-white" style="align-self: center;">
+          <i id="btnenviar" type="button" name="btnE" onclick="adminEditando()"
+            class=" btn btn-secondary text-white">Guardar</i>
+          <button type="button" id="cerrar" class="btn btn-secondary" data-bs-dismiss="modal"
+            style="background-color: rgb(96, 97, 97);">Cerrar</button>
+
+        </div>
+
+      </div>
+    </div>
 
 
 
@@ -142,17 +147,16 @@
 
 
 
-{{>footer}}
- 
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"></script>
-     
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    {{>footer}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
       crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
-      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"></script>
 
 </body>
@@ -160,69 +164,68 @@
 </html>
 
 <script>
-  $( document ).ready(function() {
+
+  $(document).ready(function () {
     formatoFecha()
   });
-//Dando formato a la fecha.
+  //Dando formato a la fecha.
+  function formatoFecha() {
+    $('.fHandle').each(function (i, campo) {
+      if (campo.textContent == "" || campo.textContent == null) {
+        campo.textContent = "No Asignada";
+      } else {
+        campo.textContent = new Date(campo.textContent).toLocaleDateString();
+      }
 
- function  formatoFecha() {   
-    $('.fHandle').each(function(i, campo) {
-        if(campo.textContent == "" || campo.textContent == null){
-          campo.textContent = "No Asignada";
-        }else{
-          campo.textContent = new Date(campo.textContent).toLocaleDateString();
-        }
-        
-    }); 
-  };   
+    });
+  };
 
+//editando datos del presupuesto por el administrador.
+  function adminEditando() {
+    let id = parseInt($("#idPresuE").text());
+    let fechaEntregap = $("#fechaEe").val();
+    let estadoA = $("#estadoAdmin").val();
+    let observaciones = $("#observacionesyoli").val();
 
-
- function adminEditando(){
- 
-   let id = parseInt( $("#idPresuE").text() );
-   let fechaEntregap = $("#fechaEe").val();
-   let estadoA = $("#estadoAdmin").val();
-   let observaciones = $("#observacionesyoli").val();
-            
- axios.put(`/presupuestos/fechaE/${id}`,
+    axios.put(`/presupuestos/fechaE/${id}`,
       {
         fecha_probable_de_entrega: fechaEntregap,
         estado: estadoA,
         observaciones_admin: observaciones
       })
-      .then((response) => { 
-          console.log(response);   
-           alert("Cambios Realizados");
-           
-           filtrar()
- 
-      })
-        };
+      .then((response) => {
+        console.log(response);
+        alert("Cambios Realizados");
 
-        function filtrar(){
-          
-   let rut =  $("#rutFiltro").val();
-   let fechaEmision = $("#fechaEmi").val();
-   let estado = $("#filtroEstado").val();
-   
- axios.get(`/presupuestos/filtro`,
-      { params: {
+        filtrar()
+
+      })
+  };
+
+//Filtrando datos de las tablas.
+  function filtrar() {
+    let rut = $("#rutFiltro").val();
+    let fechaEmision = $("#fechaEmi").val();
+    let estado = $("#filtroEstado").val();
+
+    axios.get(`/presupuestos/filtro`,
+      {
+        params: {
           rut: rut,
           fecha_de_emision: fechaEmision,
-          estado: estado       
+          estado: estado
         }
       })
-      .then((response) => { 
-          console.log(response);   
-           
-                  
-          let div = document.getElementById("tbodyPresu");
-          div.innerHTML = ""; 
-          response=response.data;
-          for(i=0; i<response.length; i++) { 
+      .then((response) => {
+        console.log(response);
 
-          div.innerHTML +=`<tr>
+
+        let div = document.getElementById("tbodyPresu");
+        div.innerHTML = "";
+        response = response.data;
+        for (i = 0; i < response.length; i++) {
+
+          div.innerHTML += `<tr>
                   <th>${response[i].id}</th>  
                    <th>${response[i].nombre}</th>
                    <th>${response[i].rut}</th>               
@@ -230,53 +233,46 @@
                   <td><span class="fHandle">${response[i].fecha_de_validez}</span></td>       
                   <td><span class="fHandle">${response[i].fecha_probable_de_entrega}</span></td>      
                   <td><i onclick="detallesAdmin('${response[i].id}','${response[i].fecha_de_emision}', '${response[i].fecha_de_validez}', '${response[i].estado}', '${response[i].observaciones_cliente}', '${response[i].fecha_probable_de_entrega}','${response[i].observaciones_admin}', '${response[i].precio_total}', '${response[i].nombre}', '${response[i].rut}', '${response[i].email}', '${response[i].telefono}')" class="fa-solid fa-magnifying-glass"></i></td>
-                  <td>${response[i].estado}</td>
-                                  
+                  <td>${response[i].estado}</td>                                  
               </tr>`;
-                  
-      }
-      formatoFecha()
-        }, (error) => {
-          console.log(error);
-          alert("Disculpe hubo un error")
-        }); 
-};
 
+        }
+        formatoFecha()
+      }, (error) => {
+        console.log(error);
+        alert("Disculpe hubo un error")
+      });
+  };
 
-
-
-
-function detallesAdmin(id, fecha_de_emision, fecha_de_validez, estado, observaciones_cliente, fecha_probable_de_entrega, observaciones_admin, precio_total, nombre, rut, email, telefono){
-    
+//Desplegando detalles en modal desde el administrador
+  function detallesAdmin(id, fecha_de_emision, fecha_de_validez, estado, observaciones_cliente, fecha_probable_de_entrega, observaciones_admin, precio_total, nombre, rut, email, telefono) {
     $("#idPresuE").text(id);
     $("#nombre").text(nombre);
     $("#rut").text(rut);
     $("#correo").text(email);
-    $("#telefono").text(telefono);    
+    $("#telefono").text(telefono);
     $("#fechaEmision").text(new Date(fecha_de_emision).toLocaleDateString());
     $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString()); console.log(fecha_probable_de_entrega)
-    if(fecha_probable_de_entrega == null || fecha_probable_de_entrega == ""){
+    if (fecha_probable_de_entrega == null || fecha_probable_de_entrega == "") {
       $("#fechaEe").val("");
-    }else{
-      $("#fechaEe").val(new Date (fecha_probable_de_entrega).toISOString().split('T')[0]);      
-    }    
+    } else {
+      $("#fechaEe").val(new Date(fecha_probable_de_entrega).toISOString().split('T')[0]);    }
     $("#observaciones").text(observaciones_cliente);
     $("#observacionesyoli").val(observaciones_admin);
     $("#estado").text(estado);
     $("#total").text(precio_total);
-
     $("#estadoAdmin").val(estado);
- 
-  axios.get(`/presupuestos/detalles/${id}`)
+
+    axios.get(`/presupuestos/detalles/${id}`)
       .then((response) => {
 
-          console.log(response);            
-          let div = document.getElementById("productosPresu");
-          div.innerHTML = ""; 
-          response=response.data;
-for(i=0; i<response.length; i++) { 
+        console.log(response);
+        let div = document.getElementById("productosPresu");
+        div.innerHTML = "";
+        response = response.data;
+        for (i = 0; i < response.length; i++) {
 
-          div.innerHTML +=`
+          div.innerHTML += `
         <div class="row col-sm-12">
           <div class="col-sm-5 mb-2 pt-0"  >  
                 <img  class=" imgModal pt-0 mx-0 "  src="/static/assets/img/${response[i].foto}"  alt="">
@@ -291,19 +287,18 @@ for(i=0; i<response.length; i++) {
                </div>   
               </div>`;;
 
-              
-};
+
+        };
 
 
-$("#modalAdmin").modal("show");
+        $("#modalAdmin").modal("show");
+      }, (error) => {
+        console.log(error);
+        alert("Disculpe hubo un error")
+      });
 
-        }, (error) => {
-          console.log(error);
-          alert("Disculpe hubo un error")
-        });
-          
 
-}
+  }
 
 
 

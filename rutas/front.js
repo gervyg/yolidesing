@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 });
 
-
+//Envio de correo desde main.
 router.post('/mailing', async (req, res) => {   
     const { nombre, correo, asunto, contenido } = req.body;    
     const contenido1 = `${nombre}, 
@@ -127,7 +127,7 @@ router.get('/cliente/presupuesto/lista',  async (req, res) => {
         presupuestos:presupuestos
     });
 })
-
+// token duracion.
 router.get('/SignIn', async (req, res) => {
     const { email, password } = req.query;
     const user = await db.clienteInicio(email, password)

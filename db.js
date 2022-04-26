@@ -75,7 +75,7 @@ const clienteCrear = async (rut, nombre, email, password, direccion, telefono) =
 
 }
 
-// Editando Cliente
+
 const clientEditar = async (id, rut, nombre, password, telefono, direccion) => {
     const client = new Client({
         connectionString: process.env.DATABASE_URL,
@@ -131,11 +131,6 @@ const presupuestoFiltro = async (rut, fecha, estado) => {
 }
 
 
-
-
-
-
-
 const presupuestoCrear = async (rut, productos, precio_total, observaciones_cliente) => {
     const client = new Client({
         connectionString: process.env.DATABASE_URL,
@@ -184,6 +179,7 @@ const presupuestosDetalle = async (id) => {
     return res.rows
 }
 
+
 const presupuestosAdm = async () => {
     const client = new Client({
         connectionString: process.env.DATABASE_URL,
@@ -198,6 +194,7 @@ const presupuestosAdm = async () => {
     await client.end()
     return res.rows
 }
+
 
 const adminEditar = async (id, fecha_probable_de_entrega, estado, observaciones_admin) => {
     const client = new Client({
