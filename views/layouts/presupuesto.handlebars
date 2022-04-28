@@ -236,7 +236,7 @@
   }
 
   function presupuestoCrear() {
-    console.log("productosSeleccionados: ", productosSeleccionados)
+   
     if (productosSeleccionados.length > 0) {
       axios.post(`/presupuestos`,
         {
@@ -246,7 +246,7 @@
           observaciones_cliente: $("#observacion").val()
         }
       ).then((response) => {
-        console.log(response);
+        
         alert("Presupuesto Enviado");
         window.location.href = `/cliente/presupuesto`
       }, (error) => {

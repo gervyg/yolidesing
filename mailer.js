@@ -19,14 +19,14 @@ let transporter = nodemailer.createTransport({
 async function enviar(asunto, contenido) {
     return new Promise((resolve, reject) => {
    
-            let mailOptions = {
+            let mailOpciones = {
                 from: 'yolidesing8@gmail.com',
                 to:'yolidesing8@gmail.com',
                 subject: asunto,
                 html: contenido
             }
 
-            transporter.sendMail(mailOptions, (err, data) => {
+            transporter.sendMail(mailOpciones, (err, data) => {
 
                 if (err) {
                     console.log(err);

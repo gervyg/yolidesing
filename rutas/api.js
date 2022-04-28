@@ -71,7 +71,7 @@ router.post('/presupuestos', async (req, res) => {
     const { rut, productos, precio_total, observaciones_cliente } = req.body;   
     const presupuesto = await db.presupuestoCrear(rut, productos, precio_total, observaciones_cliente )
     if (presupuesto.length > 0) {
-    const contenidoCorreo =  `Hola Yoliber, te ha llegado un nuevo presupuesto. 
+    const contenidoCorreo =  `Hola Yolidesings, te ha llegado un nuevo presupuesto. 
                 <br>
                 RUT del cliente: ${rut}, 
                 <br>

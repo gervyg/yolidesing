@@ -9,11 +9,11 @@ const mail = require('../mailer')
 const jwt = require('jsonwebtoken')
 
 const secretKey = "12346";
-//console.log(secretKey)
+
 
 const router = Router()
 
-//**Rutas handlebars*/
+//Rutas handlebars/
 router.get('/', async (req, res) => {
     const user = await db.getcliente()
     res.render('index', { user })   
@@ -23,9 +23,9 @@ router.get('/', async (req, res) => {
 //Envio de correo desde main.
 router.post('/mailing', async (req, res) => {   
     const { nombre, correo, asunto, contenido } = req.body;    
-    const contenido1 = `${nombre}, 
+    const contenido1 = `Yolidesings, ${nombre} te ha escrito, 
                         <br>
-                        ${correo}, 
+                        Su correo es:  ${correo}, 
                         <br>
                         ${contenido}`;
     mail.enviar(asunto, contenido1)                

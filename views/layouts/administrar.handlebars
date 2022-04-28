@@ -194,11 +194,8 @@
         observaciones_admin: observaciones
       })
       .then((response) => {
-        console.log(response);
         alert("Cambios Realizados");
-
         filtrar()
-
       })
   };
 
@@ -217,9 +214,7 @@
         }
       })
       .then((response) => {
-        console.log(response);
-
-
+        
         let div = document.getElementById("tbodyPresu");
         div.innerHTML = "";
         response = response.data;
@@ -252,7 +247,7 @@
     $("#correo").text(email);
     $("#telefono").text(telefono);
     $("#fechaEmision").text(new Date(fecha_de_emision).toLocaleDateString());
-    $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString()); console.log(fecha_probable_de_entrega)
+    $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString()); 
     if (fecha_probable_de_entrega == null || fecha_probable_de_entrega == "") {
       $("#fechaEe").val("");
     } else {
@@ -266,7 +261,6 @@
     axios.get(`/presupuestos/detalles/${id}`)
       .then((response) => {
 
-        console.log(response);
         let div = document.getElementById("productosPresu");
         div.innerHTML = "";
         response = response.data;
