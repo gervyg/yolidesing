@@ -133,7 +133,7 @@ router.get('/SignIn', async (req, res) => {
     const user = await db.clienteInicio(email, password)
 
     if (user.length != 0) {
-        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 120, data: user[0], },
+        const token = jwt.sign({ exp: Math.floor(Date.now() / 1000) + 240, data: user[0], },
             secretKey
 
         );
