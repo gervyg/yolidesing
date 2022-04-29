@@ -264,8 +264,8 @@
 
   //limpiar campos de presupuesto al click cancelar.
   function limpiar() {
-
-    const productosSeleccionados = [];
+    
+    productosSeleccionados.splice(0, productosSeleccionados.length); 
     let div = document.getElementById("containerpresu");
     div.innerHTML = "<p class='text-center'>No hay productos selccionados</p>"
     $("#totalNeto").text(0);

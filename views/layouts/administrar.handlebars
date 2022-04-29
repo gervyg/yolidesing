@@ -171,7 +171,7 @@
   //Dando formato a la fecha.
   function formatoFecha() {
     $('.fHandle').each(function (i, campo) {
-      if (campo.textContent == "" || campo.textContent == null) {
+      if (campo.textContent == "" || campo.textContent == null || campo.textContent == 'null') {
         campo.textContent = "No Asignada";
       } else {
         campo.textContent = new Date(campo.textContent).toLocaleDateString();
@@ -248,7 +248,7 @@
     $("#telefono").text(telefono);
     $("#fechaEmision").text(new Date(fecha_de_emision).toLocaleDateString());
     $("#fechaValidez").text(new Date(fecha_de_validez).toLocaleDateString()); 
-    if (fecha_probable_de_entrega == null || fecha_probable_de_entrega == "") {
+    if (fecha_probable_de_entrega == null || fecha_probable_de_entrega == "" || fecha_probable_de_entrega == 'null') {
       $("#fechaEe").val("");
     } else {
       $("#fechaEe").val(new Date(fecha_probable_de_entrega).toISOString().split('T')[0]);    }
